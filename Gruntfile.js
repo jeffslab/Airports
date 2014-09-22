@@ -18,7 +18,7 @@ module.exports = function(grunt) {
                     client : true
                 },
                 files : {
-                    'public/js/jade-template.js' : 'views/tmpl/*.jade'
+                    'build/views/jade.js' : 'template/**/*.jade'
                 }
             }
         },
@@ -32,19 +32,8 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: 'build',
-                    //线上发布一个build/api/tesla-api-resource.js的文件，不需压缩，以便线上问题转发调试
-                    src: ['**/*.js', '!api/tesla-api-resource.js', '!api/jaguarjs-jsdoc/**/*.js'],
+                    src: ['**/*.js'],
                     dest: 'build'
-                    //ext: '.min.js'
-                }]
-            },
-            'minify-api': {
-                files: [{
-                    expand: true,
-                    cwd: 'build',
-                    src: ['api/tesla-api.js'],
-                    dest: 'build',
-                    ext: '-min.js'
                 }]
             }
         },
@@ -70,52 +59,28 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: '.',
-                    src: ['api/test/index.html', 'api/test/index-women-channel.html'],
+                    src: ['html/*.html'],
                     dest: 'build'
                 }]
             },
             css: {
                 options: {
-                    process: function (content, srcpath) {
-                            return content;
-                    },
-                    noProcess: ['**/*.{css,jpg,png,gif}']
                 },
                 files: [{
                     expand: true,
-                    cwd: 'public',
-                    src: ['css/modules.css', 'css/creative-iframe.css'],
+                    cwd: '.',
+                    src: ['style/**/*.css', 'style/res/*.{svg,ttf,eot,woff}'],
                     dest: 'build'
                 }]
             },
-            jsJade: {
+            js: {
                 options: {
-                    noProcess: ['**/*.{css,jpg,png,gif}']
-                },
-                files: [{
-                    expand: true,
-                    cwd: 'public',
-                    src: ['js/jade-*.js'],
-                    dest: 'build'
-                }]
-            },
-            jsApi: {
-                options: {
-                    process: function (content, srcpath) {
-                        if (/tesla\-api\.js/g.test(srcpath)) {
-                            console.warn('\033[32;32m [正在替换环境变量，加载路径]：\033[0m', srcpath, ' 为 ', ENV_PATH);
-                            content = content.replace(/(var\s+ENV_PATH\s*=).*/gi, '$1 "' + ENV_PATH + '"');
-                            //console.warn(content);
-                            return content;
-                        }
-                        return content;
-                    },
                     noProcess: ['**/*.{css,jpg,png,gif}']
                 },
                 files: [{
                     expand: true,
                     cwd: '.',
-                    src: ['api/tesla-api.js', 'api/data/*.js'],
+                    src: ['lib/**/*.js'],
                     dest: 'build'
                 }]
             }
@@ -123,7 +88,7 @@ module.exports = function(grunt) {
         jshint: {
             main: {
                 files: {
-                    src: ['**/*.js', '!build/**/*.js', '!public/js/*.js', '!node_modules/**/*.js', '!build/**/*.min.js']
+                    src: ['**/*.js', '!build/**/*.js', '!node_modules/**/*.js', '!bower_components/**/*.js']
                 },
                 options: {
                     //jshintrc: '.jshintrc',
@@ -156,9 +121,9 @@ module.exports = function(grunt) {
             },
             minify: {
                 expand: true,
-                cwd: 'build/public/css/',
-                src: ['*.css', '!*.min.css'],
-                dest: 'build/public/css'
+                cwd: '.',
+                src: ['style/*.css'],
+                dest: 'build'
                 //ext: '.min.css'
             }
         },
@@ -167,36 +132,18 @@ module.exports = function(grunt) {
                 options: {
                     hostname: HOSTNAME,
                     port: SERVER_PORT,
-                    base: 'src',
+                    base: 'html',
                     livereload: LIVERELOAD_PORT
                 }
             }
         },
         watch: {
-            less: {
-                files: ['**/*.less', '!**/*.css'],
-                tasks: ['less:watch']
-            },
             tmpl: {
-                files: ['**/*.tmpl']
+                files: ['build/views/jade.js']
             },
             options: {
                 livereload: LIVERELOAD_PORT,
                 spawn: true
-            }
-        },
-        less: {
-            options: {
-                compress: true
-            },
-            watch: {
-                files: [{
-                    cwd: 'src/',
-                    expand: true,
-                    src: '**/*.less',
-                    dest: 'src',
-                    ext: '.less.css'
-                }]
             }
         },
         open: {

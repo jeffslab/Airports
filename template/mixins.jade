@@ -1,0 +1,63 @@
+mixin aliIcon(shopInfo)
+  if (shopInfo != undefined)
+    - var LARGE_SETTINGS = [[640, 290], [640, 300], [740, 230]];
+    - var rankLevel = Math.floor((shopInfo.rank - 1) / 5) + 1;
+    - var rankCount = (shopInfo.rank - 1) % 5 + 1;
+    - var index = 0;
+    - var isLarge = false;
+    - var item;
+    - var classStr = '';
+    - if (shopInfo.shopType == 1) {rankLevel = 0; rankCount = 1;}
+    - for (var i = 0; i < LARGE_SETTINGS.length; i++) {
+    -     item = LARGE_SETTINGS[i];
+    -     if (item[0] == shopInfo.adWidth && item[1] == shopInfo.adHeight) {
+    -         isLarge = true;
+    -         break;
+    -     }
+    - }
+    - if (isLarge) classStr = 'rank-large rank-large-type-' + rankLevel;
+    - else classStr = 'rank rank-type-' + rankLevel;
+    div(class="#{classStr}")
+      while (index++ < rankCount)
+        i
+  else
+    |渲染失败,shopInfo为空
+
+mixin consumerIcon(shopInfo)
+  - var i = 0;
+  - var counter = 0;
+  - var keys = ['genuineGuarantee', 'sevendaysRefundment', 'payForThrice', 'realDescribe', 'lightPost'];
+  div(class='consumer-icons')
+    while (i < keys.length && counter < 3)
+      if (shopInfo[keys[i]])
+        i(class='consumer-icons-#{i+1}')
+        - counter++;
+      - i++;
+
+mixin scaleArea(pos)
+  if (pos == undefined)
+    - pos = 'margin:0 auto';
+  else
+    - pos = '';
+  div(style="#{pos};position:relative;width:#{scaleImageWidth}px;height:#{scaleImageHeight}px;overflow:hidden;")
+    img(src="#{adInfo.src}" style="position: absolute;left:-#{adInfo.clip.x}px;top:-#{adInfo.clip.y}px;width:#{adInfo.width}px;height:#{adInfo.height}px;clip:rect(#{adInfo.clip.y}px #{adInfo.clip.w + adInfo.clip.x}px #{adInfo.clip.h + adInfo.clip.y}px #{adInfo.clip.x}px)")
+
+mixin vertiCalMiddleShopName(shopName, height, fontSize, lineHeight, bgWidth)
+  if (options.hideShopName != true && shopInfo.hideShopName != true)
+    if (shopInfo.adWidth - scaleImageWidth < bgWidth)
+      div(class="bgOpacityAtRight" style="height: #{shopInfo.adHeight}px;width:#{bgWidth}px;")
+    div(class="shopNameAtRight" style="height: #{height}px;line-height:#{lineHeight}px;font-size:#{fontSize}px;width:#{bgWidth}px;")
+      div(style="display:table;*position:relative;height:#{height}px;")
+        div(style="vertical-align:middle;display:table-cell;*position:absolute;*top:50%;")
+          div(style="*position:relative;*top:-50%;padding: 0 5px;") #{shopName}
+
+mixin horizontalMiddleShopName(fontSize, bgHeight)
+  if (options.hideShopName != true && shopInfo.hideShopName != true)
+    div(class="shopNameInSmallWrapper" style="position: absolute; bottom: 0; height: #{shopInfo.adHeight - scaleImageHeight < bgHeight ? bgHeight : shopInfo.adHeight - scaleImageHeight}px; line-height: #{shopInfo.adHeight - scaleImageHeight < bgHeight ? bgHeight : shopInfo.adHeight - scaleImageHeight}px; text-align: center; font-size: #{fontSize}px; color: #666;z-index: 20; width: 100%;") #{shopInfo.shopName}
+    if (shopInfo.adHeight - scaleImageHeight < bgHeight)
+      div(class="bgOpacityNew" style="height: #{bgHeight}px;")
+
+mixin renderLogo(w, h)
+  if (options.hideLogo != true && shopInfo.hideLogo != true)
+    div(class="shopLogo" style="left:0;top: 0;width:#{w}px;height:#{h}px;")
+      img(src="#{shopInfo.logoSrc}" style="width:#{w}px;height:#{h}px;")
