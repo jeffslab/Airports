@@ -2,7 +2,7 @@
     * @description 部署配置
  **/
 
-var HOSTNAME = 'localhost';
+var HOSTNAME = '0.0.0.0';
 var LIVERELOAD_PORT = 9991;
 var SERVER_PORT = 9966;
 

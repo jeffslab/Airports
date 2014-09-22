@@ -6,18 +6,19 @@
         <meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=no"/>
         <link rel="stylesheet" href="../style/index.css"/>
         <script src="../lib/zepto.js"></script>
+        <script src="../lib/jquery.js"></script>
         <script src="../lib/common.js"></script>
         <style>
             .page1{
-                    width:100%;
-                height:auto;
-                background:url('../res/bg-ecar.jpg') no-repeat left top fixed;
+                width:100%;
+                height: auto;
+                background: url('../res/bg-ecar.jpg') no-repeat fixed;
                 -webkit-background-size:cover;
                 background-size:cover;
                 transition:all 0.3s ease;
-                  }
+            }
             .bg-1{
-                }
+            }
             .wrapper{
                 width:50rem;
                 color:#fff;
@@ -25,7 +26,7 @@
                 position:relative;
             }
             .wrapper .topicon{
-                text-align:center; 
+                text-align:center;
                 padding-top:6rem;
                 margin-bottom:9rem;
             }
@@ -125,8 +126,21 @@
         <div class="page3">
             <div class="bg-3"></div>
         </div>
-        <script>            
-            
+        <script>
+            console.warn(1);
+            $(function () {
+                var pages = $('div.page1');
+                pages.bind('touchstart', function () {
+                    console.warn('start');
+                    //$(this).css({'-webkit-filter': 'blur(5px)', filter: 'blur(5px)'});
+                }).bind('touchmove', function () {
+                    console.warn('move');
+                    $(this).css({'-webkit-filter': 'blur(5px)', filter: 'blur(5px)'});
+                }).bind('touchend', function (e) {
+                    console.warn('end');
+                    $(this).css({'-webkit-filter': '', filter: ''});
+                });
+            });
         </script>
      <body>
 </html>
