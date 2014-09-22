@@ -47,15 +47,6 @@ module.exports = function(grunt) {
                 }]
             },
             html: {
-                options: {
-                    process: function (content, srcpath) {
-                            console.warn('\033[32;32m [正在替换环境变量，加载路径]：\033[0m', srcpath, ' 为 ', ENV_PATH);
-                            content = content.replace(/(var\s+ENV_PATH\s*=).*/gi, '$1 "' + ENV_PATH + '"');
-                            //console.warn(content);
-                            return content;
-                    },
-                    noProcess: ['**/*.{css,jpg,png,gif}']
-                },
                 files: [{
                     expand: true,
                     cwd: '.',
@@ -64,8 +55,6 @@ module.exports = function(grunt) {
                 }]
             },
             css: {
-                options: {
-                },
                 files: [{
                     expand: true,
                     cwd: '.',
@@ -88,7 +77,7 @@ module.exports = function(grunt) {
         jshint: {
             main: {
                 files: {
-                    src: ['**/*.js', '!build/**/*.js', '!node_modules/**/*.js', '!bower_components/**/*.js']
+                    src: ['**/*.js', '!lib/zepto*.js', '!lib/jquery*.js', '!lib/bootstrap/**/*.js', '!lib/jade/**/*.js', '!build/**/*.js', '!node_modules/**/*.js', '!bower_components/**/*.js']
                 },
                 options: {
                     //jshintrc: '.jshintrc',
@@ -114,7 +103,11 @@ module.exports = function(grunt) {
                 }
             }
         },
-        clean: 'build',
+        clean: {
+            build: {
+                src: ['build']
+            }
+        },
         cssmin: {
             options: {
                 banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
