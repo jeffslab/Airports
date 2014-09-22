@@ -1,17 +1,10 @@
 {
-  "name": "auto-tesla",
+  "name": "AirPorts",
   "version": "0.0.1",
   "private": true,
-  "description": "tesla auto creative explorer",
-  "scripts": {
-    "start": "node ./bin/www"
-  },
+  "description": "Team work",
   "keywords": [
-    "tesla",
-    "alimama",
-    "auto-creations"
   ],
-  "author": "limu@taobao.com",
   "dependencies": {
     "body-parser": "~1.0.0",
     "cookie-parser": "~1.0.1",
@@ -37,7 +30,6 @@
     "grunt": "^0.4.5",
     "grunt-contrib-clean": "^0.5.0",
     "grunt-contrib-copy": "^0.5.0",
-    "grunt-contrib-jade": "^0.12.0",
-    "grunt-jsdoc": "^0.5.7"
+    "grunt-contrib-jade": "^0.12.0"
   }
 }

@@ -20,14 +20,6 @@ module.exports = function(grunt) {
                 files : {
                     'public/js/jade-template.js' : 'views/tmpl/*.jade'
                 }
-            },
-            compileResourceChangeProject : {
-                options : {
-                    client : true
-                },
-                files : {
-                    'public/js/jade-templateWithResourceChangeProject.js' : ['views/tmpl/wrc/*.jade', 'views/tmpl/mixins-aliIcon.jade', 'views/tmpl/mixins.jade']
-                }
             }
         },
         cache: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n',
@@ -54,21 +46,6 @@ module.exports = function(grunt) {
                     dest: 'build',
                     ext: '-min.js'
                 }]
-            }
-        },
-        jsdoc: {
-            dist: {
-                cwd: '.',
-                src: ['api/tesla-api.js', 'api/data/tmplData.js'],
-                options: {
-                    destination: 'build/doc',
-                    debug: true,
-                    //encoding: 'gb2312',
-                    'private': false,
-                    //version: false,
-                    template: 'api/jaguarjs-jsdoc',
-                    configure: 'api/jaguarjs-jsdoc/conf.json'
-                }
             }
         },
         copy: {
@@ -141,28 +118,12 @@ module.exports = function(grunt) {
                     src: ['api/tesla-api.js', 'api/data/*.js'],
                     dest: 'build'
                 }]
-            },
-            jsApiResourceCode: {
-                options: {
-                    process: function (content, srcpath) {
-                        console.warn('\033[32;32m [正在替换环境变量，加载路径]：\033[0m', srcpath, ' 为 ', ENV_PATH);
-                        content = content.replace(/(var\s+ENV_PATH\s*=).*/gi, '$1 "' + ENV_PATH + '"');
-                        return content;
-                    }
-                },
-                files: [{
-                    expand: true,
-                    cwd: '.',
-                    src: ['api/tesla-api.js'],
-                    dest: 'build',
-                    ext: '-resource.js'
-                }]
             }
         },
         jshint: {
             main: {
                 files: {
-                    src: ['**/*.js', '!api/jaguarjs-jsdoc/**/*.js', '!build/**/*.js', '!public/js/*.js', '!node_modules/**/*.js', '!build/**/*.min.js']
+                    src: ['**/*.js', '!build/**/*.js', '!public/js/*.js', '!node_modules/**/*.js', '!build/**/*.min.js']
                 },
                 options: {
                     //jshintrc: '.jshintrc',
@@ -188,14 +149,7 @@ module.exports = function(grunt) {
                 }
             }
         },
-        clean: {
-            build: {
-                src: ['build']
-            },
-            jsdoc: {
-                src: ['build/doc']
-            }
-        },
+        clean: 'build',
         cssmin: {
             options: {
                 banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
@@ -266,9 +220,7 @@ module.exports = function(grunt) {
             'watch'
         ]);
     });
-    grunt.registerTask('pro', ['clean', 'jshint', 'jade', 'copy', 'cssmin', 'uglify', 'jsdoc']);
-    grunt.registerTask('daily', ['clean', 'jshint', 'jade', 'copy', 'cssmin']);
+    grunt.registerTask('pro', ['clean', 'jshint', 'jade', 'copy', 'cssmin', 'uglify']);
     grunt.registerTask('test', ['jshint']);
-    grunt.registerTask('doc', ['clean:jsdoc', 'jsdoc']);
     grunt.registerTask('default', ['jade', 'copy']);
 };
