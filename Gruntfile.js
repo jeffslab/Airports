@@ -131,6 +131,9 @@ module.exports = function(grunt) {
             }
         },
         watch: {
+            html: {
+                files: ['html/*.html']
+            },
             tmpl: {
                 files: ['build/views/jade.js']
             },
