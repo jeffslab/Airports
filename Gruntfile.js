@@ -2,7 +2,7 @@
     * @description 部署配置
  **/
 
-var HOSTNAME = 'localhost';
+var HOSTNAME = '0.0.0.0';
 var LIVERELOAD_PORT = 9991;
 var SERVER_PORT = 9966;
 
@@ -125,7 +125,7 @@ module.exports = function(grunt) {
                 options: {
                     hostname: HOSTNAME,
                     port: SERVER_PORT,
-                    base: 'html',
+                    base: '.',
                     livereload: LIVERELOAD_PORT
                 }
             }
@@ -137,6 +137,9 @@ module.exports = function(grunt) {
             jade: {
                 files: ['template/**/*.jade'],
                 tasks: ['jade']
+            },
+            css: {
+                files: ['style/*.css']
             },
             tmpl: {
                 files: ['lib/jade/jade-template.js']

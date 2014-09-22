@@ -1,0 +1,147 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <title>我的航班</title>
+        <meta charset="utf-8" /> 
+        <meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=no"/>
+        <link rel="stylesheet" href="../style/index.css"/>
+        <script src="../lib/zepto.js"></script>
+        <script src="../lib/jquery.js"></script>
+        <script src="../lib/common.js"></script>
+        <style>
+            .page1{
+                width:100%;
+                height: auto;
+                background: url('../res/bg-ecar.jpg') no-repeat fixed;
+                -webkit-background-size:cover;
+                background-size:cover;
+                transition:all 0.3s ease;
+            }
+            .bg-1{
+            }
+            .wrapper{
+                width:50rem;
+                color:#fff;
+                margin:0 auto;
+                position:relative;
+            }
+            .wrapper .topicon{
+                text-align:center;
+                padding-top:6rem;
+                margin-bottom:9rem;
+            }
+            .wrapper .myfonts{
+                font-size:20rem; 
+            }
+             .wrapper h2{
+                font-size:3.2rem;
+                font-weight:bold;
+                margin-top:4rem;
+            }
+            .wrapper .detail{
+                margin:0 auto; 
+            }
+             .wrapper .detail .call{
+                width:50rem; 
+                height:13rem;
+                display:block;
+                border:2px solid #fff;;
+                margin: 0 auto;
+                color:#fff;
+                text-align:center;
+                font-size:3.2rem;
+                vertical-align:middle;
+                line-height:13rem;
+                margin-top:5rem;
+                text-decoration:none;
+            }
+             .wrapper .detail .icon_call{
+                font-size:6rem;  
+                margin-right:2rem;
+            }
+             .wrapper .detail p{
+                line-height:6rem; 
+                font-size:3.6rem;
+                margin:0 auto;
+            }
+            .wrapper .btn-down{
+                font-size:6rem; 
+                color:#fff;
+                text-align:center;
+                margin-top:27rem;
+            }
+            .page2{
+               transition:all 0.3s ease;
+               width:100%;
+              height:auto;
+              background:url('../res/bg-emergency.jpg') no-repeat left top fixed;
+              -webkit-background-size:cover;
+              background-size:cover;
+            }
+            .bg-2{
+            }
+            .bg-3{
+            
+            }
+        </style>
+    </head>
+    <body>
+        <div class="page1">
+            <div class="wrapper"> 
+                 <div class="topicon">
+                     <i class="icon icon_ecar myfonts"></i> 
+                     <h2>免费电瓶车</h2>
+                 </div>
+                 <div class="detail">
+                     <p>3号航站楼候机区内电瓶车向旅客提供免费服务，老、弱、病、残、孕及距离起飞时间不足25分钟的急客优先</p>  
+                     <a class="call" href="tel:010-8819999">
+                         <i class="icon icon_call"></i>呼叫电瓶车 
+                     </a>
+                 </div>
+                 <div class="btn-down"><i class="icon icon_btnDown"></i></div>
+             </div>
+         </div>
+         <div class="page2">
+            <div class="wrapper"> 
+                 <div class="topicon">
+                     <i class="icon icon_emergency myfonts"></i> 
+                     <h2>医疗急救</h2>
+                 </div>
+                 <div class="detail">
+                     <p>医疗急救站为您提供航站楼内出诊，急救及转送病人等服务，并备有各种常用的急救药品。</p>
+                     <div class="positionMess">
+                         <p>位置与服务时间</p> 
+                         <div class="posDetail">
+                             <p>国内候机厅C07登机口附近</p>
+                             <p>服务时间：06:30-22:00</p>
+                         </div>
+                     </div>
+                     <a class="call" href="tel:010-8819999">
+                         <i class="icon icon_call"></i>呼叫电瓶车 
+                     </a>
+                 </div>
+                 <div class="btn-down"><i class="icon icon_btnDown"></i></div>
+             </div>
+        </div>
+        <div class="page3">
+            <div class="bg-3"></div>
+        </div>
+        <script>
+            console.warn(1);
+            $(function () {
+                var pages = $('div.page1');
+                pages.bind('touchstart', function () {
+                    console.warn('start');
+                    //$(this).css({'-webkit-filter': 'blur(5px)', filter: 'blur(5px)'});
+                }).bind('touchmove', function () {
+                    console.warn('move');
+                    $(this).css({'-webkit-filter': 'blur(5px)', filter: 'blur(5px)'});
+                }).bind('touchend', function (e) {
+                    console.warn('end');
+                    $(this).css({'-webkit-filter': '', filter: ''});
+                });
+            });
+        </script>
+     <body>
+</html>
+
