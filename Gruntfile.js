@@ -1,10 +1,7 @@
 /**
     * @description 部署配置
-    * @author yuhao@taobao.com
  **/
 
-//var ENV_PATH = 'http://g.tbcdn.cn/mm/tesla-project/1.0.10/';
-var ENV_PATH = 'http://g.assets.daily.taobao.net/mm/tesla-project/1.0.11/';
 var HOSTNAME = 'localhost';
 var LIVERELOAD_PORT = 9991;
 var SERVER_PORT = 9966;
