@@ -138,6 +138,9 @@ module.exports = function(grunt) {
                 files: ['template/**/*.jade'],
                 tasks: ['jade']
             },
+            css: {
+                files: ['style/*.css']
+            },
             tmpl: {
                 files: ['lib/jade/jade-template.js']
             },
