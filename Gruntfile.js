@@ -18,7 +18,7 @@ module.exports = function(grunt) {
                     client : true
                 },
                 files : {
-                    'build/views/jade.js' : 'template/**/*.jade'
+                    'lib/jade/jade-tmpl.js' : 'template/**/*.jade'
                 }
             }
         },
@@ -134,8 +134,12 @@ module.exports = function(grunt) {
             html: {
                 files: ['html/*.html']
             },
+            jade: {
+                files: ['template/**/*.jade'],
+                tasks: ['jade']
+            },
             tmpl: {
-                files: ['build/views/jade.js']
+                files: ['lib/jade/jade-template.js']
             },
             options: {
                 livereload: LIVERELOAD_PORT,
