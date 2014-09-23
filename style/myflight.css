@@ -161,3 +161,45 @@ div.fr {
     height: 24.5rem;
     background: #3264ba;
 }
+
+
+.smsBox {
+    border: 3px solid #fff;
+    text-align: center;
+    margin: 0 auto;
+    width: 96%;
+    height: 7.5rem;
+    font-size: 2.4rem;
+    line-height: 7rem;
+}
+.smsBox a {
+    text-decoration: none;
+    color: #fff;
+}
+.abordGateInfos {
+    text-align: center;
+    margin: 0 auto;
+}
+.abordGateInfos a {
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+}
+.phoneNumber input, .phoneNumber button {
+    background: none;
+    border: none;
+    font-size: 2.8rem;
+    color: #fff;
+    height: 100%;
+    line-height: 100%;
+}
+.phoneNumber input {
+    float: left;
+    width: 70%;
+    text-indent: 1rem;
+}
+.phoneNumber button {
+    float: right;
+    width: 30%;
+    border-left: 3px solid #fff;
+}

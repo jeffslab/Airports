@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="../style/myflight.css" />
     </head>
     <body>
-        <div data-role="page" id="pageOne" class="bgOne" data-theme="b">
+        <div data-role="page" id="mainPage" class="bgOne" data-theme="b">
             <!--<div data-role="content" class="posAbs blurBg"></div>-->
             <div data-role="content">
                 <div class="title">
@@ -84,11 +84,26 @@
                     </li>
                 </ul>
             </div>
+            <div data-role="content">
+                <div class="smsBox">
+                    <a href="javascript: void(0)" id="smsMe"><i class="icon icon_sms" style="font-size: 3rem;margin-top: -1rem;"></i> 短信通知我</a>
+                </div>
+                <div class="abordGateInfos">
+                    <a href="#smsPage" data-transition="slideup"><i class="icon icon_btnDown" style="font-size: 5rem;margin-top: 2rem;"></i></a>
+                </div>
+            </div>
+            <script type="script/template" id="enterPhoneNumber">
+                <div class="abordGateInfos">
+                    <div class="phoneNumber">
+                        <input type="text" placeholder="手机号" />
+                        <button>确认</button>
+                    </div>
+                </div>
+            </script>
         </div>
-        <div data-role="page" id="pageTwo">
+        <div data-role="page" id="smsPage" data-theme="b">
             <div data-role="header" data-position="fixed">
                 <h1>this is a header</h1>
-                <a href="#pageOne" data-transition="slideup">pageOne</a>
             </div>
             <div data-role="content">
                 <p>我是一名移动开发者！</p>
