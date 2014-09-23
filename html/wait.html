@@ -5,9 +5,7 @@
         <meta charset="utf-8" /> 
         <meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=no"/>
         <link rel="stylesheet" href="../style/index.css"/> 
-        <link rel="stylesheet" href="../lib/jquery.mobile.structure.css"/>
-        <link rel="stylesheet" href="../lib/jquery.mobile.theme.css"/>
-        <script src="../lib/jquery.mobile.js"></script>
+        <script src="../lib/zepto.js"></script>
         <script>
             (function(){
                 var adjust=function(){
@@ -25,7 +23,28 @@
             }());
         </script>
         <style>
-            
+            .page1{
+                  }
+                  .section{
+                        width:100%; 
+                        height:100%;
+                        position:absolute;
+                  }
+            #section0{
+                background:url('../res/bg-ecar.jpg') no-repeat; 
+                background-size:cover;
+                z-index:3;
+            }
+            #section1{
+                background:url('../res/bg-emergency.jpg') no-repeat; 
+                background-size:cover;
+                z-index:2;
+            }
+            #section2{
+               background:url('../res/bg-lost.jpg') no-repeat;  
+               background-size:cover;
+               z-index:1;
+            }
             .bg-1{
                 width:100%;
                 height:100%;
@@ -43,8 +62,6 @@
                 width:50rem;
                 color:#fff;
                 margin:0 auto;
-                position:relative;
-                z-index:1;
             }
             .wrapper .topicon{
                 text-align:center; 
@@ -112,45 +129,25 @@
         </style>
     </head>
     <body>
-        <div id="page1" data-role="page" class="bg-1"> 
-            <div class="wrapper"> 
-                 <div class="topicon">
-                     <i class="icon icon_ecar myfonts"></i> 
-                     <h2>免费电瓶车</h2>
-                 </div>
-                 <div class="detail">
-                     <p>3号航站楼候机区内电瓶车向旅客提供免费服务，老、弱、病、残、孕及距离起飞时间不足25分钟的急客优先</p>  
-                     <a class="call" href="tel:010-8819999">
-                         <i class="icon icon_call"></i>呼叫电瓶车 
-                     </a>
-                 </div>
-                 <div class="btn-down"><i class="icon icon_btnDown"></i></div>
-             </div>
+        <div id="fullpage"> 
+            <!--免费电瓶车-->
+            <div class="section" id="section0">
+                 
+            </div>
+            <!--医疗急救-->
+            <div class="section" id="section1">
+                 
+            </div>
+            <!--失物招领-->
+            <div class="section" id="section2"></div>
         </div>
-        <div id="page2" data-role="page" class="bg-2">
-            <div class="wrapper"> 
-                 <div class="topicon">
-                     <i class="icon icon_emergency myfonts"></i> 
-                     <h2>医疗急救</h2>
-                 </div>
-                 <div class="detail">
-                     <p>医疗急救站为您提供航站楼内出诊，急救及转送病人等服务，并备有各种常用的急救药品。</p>
-                     <div class="positionMess">
-                         <p>位置与服务时间</p> 
-                         <div class="posDetail">
-                             <p>国内候机厅C07登机口附近</p>
-                             <p>服务时间：06:30-22:00</p>
-                         </div>
-                     </div>
-                     <a class="call" href="tel:010-8819999">
-                         <i class="icon icon_call"></i>呼叫电瓶车 
-                     </a>
-                 </div>
-                 <div class="btn-down"><i class="icon icon_btnDown"></i></div>
-             </div>
-        </div>
-        <div id="page3" data-role="page">
-        </div>
+        <script>
+            $(function(){
+                $('#section0').tap(function(){
+                    alert($(window).height()) 
+                });  
+            });
+        </script>
      <body>
 </html>
 
