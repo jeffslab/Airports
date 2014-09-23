@@ -8,6 +8,18 @@ html{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pr
   }
 /*iconfont*/
 @font-face {
+    font-family: "roboto";
+    src:url("res/roboto/Roboto-Regular.ttf");
+    font-weight:normal;
+    font-style:normal;
+}
+@font-face {
+    font-family: "robotoThin";
+    src:url("res/roboto/Roboto-Thin.ttf");
+    font-weight:normal;
+    font-style:normal;
+}
+@font-face {
     font-family:"icons";
     src:url("res/icons.eot");
     font-weight:normal;
