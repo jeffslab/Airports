@@ -203,3 +203,81 @@ div.fr {
     width: 30%;
     border-left: 3px solid #fff;
 }
+
+
+
+.gateInfo {
+    background:url('../res/bg-flight-2.jpg') no-repeat 0 0 #1b52b2;
+    background-size: 100% 100%;
+}
+.gateHeader {
+    padding-top: 2rem;
+    position: relative;
+    height: 17.4rem;
+    color: #fff;
+    text-align: center;
+}
+.gateNum {
+    font-family: "robotoThin";
+    font-size: 12rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.gateName, .otherFlights {
+    font-family: '黑体';
+    font-size: 4.8rem;
+}
+.otherFlights {
+    font-size: 3.6rem;
+}
+
+.flightsList {
+    margin: 0 auto;
+    text-align: center;
+}
+.flightsList li {
+    margin: 0 1rem 1rem 0;
+    background: #fff;
+    display: inline-block;
+    width: 20rem;
+    height: 20rem;
+    position: relative;
+}
+.timeInfo {
+    position: absolute;
+    width: 100%;
+    height: 4rem;
+    line-height: 4rem;
+    bottom: 0;
+    left: 0;
+    font-size: 2.4rem;
+    font-family: '黑体';
+    text-align: center;
+}
+.onTime {
+    background: #2CCAAE;
+    color: #000;
+}
+.onLate {
+    background: #ff3433;
+    color: #fff;
+}
+.flyIcon img {
+    width: 5rem;
+    height: 5rem;
+}
+.flyFlag, .placeName, .placeTarget {
+    font-size: 3rem;
+    font-family: '黑体';
+    color: #000;
+    font-weight: bold;
+}
+.placeTarget {
+    color: #666;
+    font-size: 2rem;
+}
+.placeName {
+    font-size: 5rem;
+    margin-top: 2rem;
+}
