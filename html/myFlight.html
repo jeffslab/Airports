@@ -86,7 +86,7 @@
             </div>
             <div data-role="content">
                 <div class="smsBox">
-                    <a href="javascript: void(0)" id="smsMe"><i class="icon icon_sms" style="font-size: 3rem;margin-top: -1rem;"></i> 短信通知我</a>
+                    <a href="javascript: void(0)" id="J_smsMe"><i class="icon icon_sms" style="font-size: 3rem;margin-top: -1rem;"></i> 短信通知我</a>
                 </div>
                 <div class="abordGateInfos">
                     <a href="#smsPage" data-transition="slideup"><i class="icon icon_btnDown" style="font-size: 5rem;margin-top: 2rem;"></i></a>
@@ -95,8 +95,16 @@
             <script type="script/template" id="enterPhoneNumber">
                 <div class="abordGateInfos">
                     <div class="phoneNumber">
-                        <input type="text" placeholder="手机号" />
-                        <button>确认</button>
+                        <input type="text" placeholder="手机号" id="J_phoneNumber" />
+                        <button id="J_sendSms">确认</button>
+                    </div>
+                </div>
+            </script>
+            <script type="script/template" id="phoneNumberSuccuss">
+                <div class="abordGateInfos">
+                    <div class="phoneNumber">
+                        {{{val}}}
+                        短信定制成功
                     </div>
                 </div>
             </script>
