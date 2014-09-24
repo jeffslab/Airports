@@ -41,8 +41,8 @@ module.exports = function(grunt) {
             images: {
                 files: [{
                     expand: true,
-                    cwd: 'public',
-                    src: ['img/**/*'],
+                    cwd: '.',
+                    src: ['res'],
                     dest: 'build'
                 }]
             },
@@ -69,7 +69,7 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: '.',
-                    src: ['lib/**/*.js'],
+                    src: ['lib/**/*'],
                     dest: 'build'
                 }]
             }
@@ -77,7 +77,7 @@ module.exports = function(grunt) {
         jshint: {
             main: {
                 files: {
-                    src: ['**/*.js', '!lib/zepto*.js', '!lib/jquery*.js', '!lib/bootstrap/**/*.js', '!lib/jade/**/*.js', '!build/**/*.js', '!node_modules/**/*.js', '!bower_components/**/*.js']
+                    src: ['**/*.js', '!lib/zepto*.js', '!lib/jqmobile/**/*', '!lib/jquery*.js', '!lib/bootstrap/**/*.js', '!lib/jade/**/*.js', '!build/**/*.js', '!node_modules/**/*.js', '!bower_components/**/*.js']
                 },
                 options: {
                     //jshintrc: '.jshintrc',
