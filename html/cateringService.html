@@ -1,0 +1,99 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <title>CateringService</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1 user-scalable=0"/>    
+    <script src="../lib/zepto.js"></script>
+    <link rel="stylesheet" href="../style/index.css"/>
+
+    <style>   
+        *{ margin:0; padding: 0;}
+        li{ list-style-type: none;}
+        img{ max-width: 100%; display: block; margin: 0 auto 1px auto;}
+        html,body{ width: 100%; height: 100%; background: #e4e4e4; 
+            -webkit-tap-highlight-color: rgba(88,44,22,0.9);
+            -webkit-touch-callout: none; 
+            -webkit-user-select: none; 
+        }    
+        .main{ width: 100%; height: auto; position: relative;}
+        .main section{ width: 100%; height: auto; position:absolute; left: 0; top:0; }
+        .main section.hide{ display: none;}
+        .main section.curr{ display: block;} 
+    
+        .menu{ width: 100%; height: 60px; position: fixed; bottom:0; left:0; }
+        .menu.menucurr{ background: #fff;}
+        .menu ul{width: 100%; height: 100%; }
+        .menu li{ width: 16.6%; height: 100%; float: left; line-height: 60px; text-align: center; background: #000; color:#fff;}
+        .menu li.curr{ }   
+    </style>
+</head>
+<body>    
+    <div class="main">
+        <section class="curr">
+            <img src="../res/menu-1/menu-1-shop-1/picture-0.jpg" alt="">
+            <img src="../res/menu-1/menu-1-shop-1/picture-0.jpg" alt="">
+            <img src="../res/menu-1/menu-1-shop-1/picture-0.jpg" alt="">
+            <img src="../res/menu-1/menu-1-shop-1/picture-0.jpg" alt="">
+            <img src="../res/menu-1/menu-1-shop-1/picture-0.jpg" alt="">
+            <img src="../res/menu-1/menu-1-shop-1/picture-0.jpg" alt="">
+            <img src="../res/menu-1/menu-1-shop-1/picture-0.jpg" alt="">
+            <img src="../res/menu-1/menu-1-shop-1/picture-0.jpg" alt="">
+            <img src="../res/menu-1/menu-1-shop-1/picture-0.jpg" alt="">
+            <img src="../res/menu-1/menu-1-shop-1/picture-0.jpg" alt="">
+            <img src="../res/menu-1/menu-1-shop-1/picture-0.jpg" alt="">
+            <img src="../res/menu-1/menu-1-shop-1/picture-0.jpg" alt="">
+        </section>
+        <section  class="hide">
+            <img src="../res/menu-1/menu-1-shop-2/picture-0.jpg" alt="">
+            <img src="../res/menu-1/menu-1-shop-2/picture-0.jpg" alt="">
+            <img src="../res/menu-1/menu-1-shop-2/picture-0.jpg" alt="">
+            <img src="../res/menu-1/menu-1-shop-2/picture-0.jpg" alt="">
+        </section>
+        <section class="hide">
+            <img src="../res/menu-1/menu-1-shop-3/picture-0.jpg" alt="">
+            <img src="../res/menu-1/menu-1-shop-3/picture-0.jpg" alt="">
+            <img src="../res/menu-1/menu-1-shop-3/picture-0.jpg" alt="">
+            <img src="../res/menu-1/menu-1-shop-3/picture-0.jpg" alt="">
+        </section>
+        <section class="hide">
+            <img src="../res/menu-1/menu-1-shop-4/picture-0.jpg" alt="">
+            <img src="../res/menu-1/menu-1-shop-4/picture-0.jpg" alt="">
+            <img src="../res/menu-1/menu-1-shop-4/picture-0.jpg" alt="">
+            <img src="../res/menu-1/menu-1-shop-4/picture-0.jpg" alt="">
+        </section>
+        <section class="hide">
+            <img src="../res/menu-1/menu-1-shop-5/picture-0.jpg" alt="">
+            <img src="../res/menu-1/menu-1-shop-5/picture-0.jpg" alt="">
+            <img src="../res/menu-1/menu-1-shop-5/picture-0.jpg" alt="">
+            <img src="../res/menu-1/menu-1-shop-5/picture-0.jpg" alt="">
+        </section>
+        <section class="hide">
+            <img src="../res/menu-1/menu-1-shop-6/picture-0.jpg" alt="">
+            <img src="../res/menu-1/menu-1-shop-6/picture-0.jpg" alt="">
+            <img src="../res/menu-1/menu-1-shop-6/picture-0.jpg" alt="">
+            <img src="../res/menu-1/menu-1-shop-6/picture-0.jpg" alt="">
+        </section>
+    </div>
+<div class="menu">
+    <ul>
+        <li class="curr icon icon_menuNear "></li>
+        <li class="icon icon_dutyFree "></li>
+        <li class="icon icon_menuFood "></li>
+        <li class="icon icon_menuCoffee "></li>
+        <li class="icon icon_menuRestaurant "></li>
+        <li class="icon icon_menuShop "></li>
+    </ul>
+</div>
+</body>
+<script>
+    $(function () {
+        $(".menu li").each(function (index) {
+            $(this).tap(function () {
+                $(this).addClass("curr").siblings().removeClass("curr");
+                $(".main section").eq(index).show().siblings().hide();
+            })
+        })
+    })
+</script>
+</html>
