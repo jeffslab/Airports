@@ -8,34 +8,33 @@
         <script src="../lib/jqmobile/jquery.mobile.custom.js"></script>
         <link rel="stylesheet" href="../style/index.css" />
         <link rel="stylesheet" href="../lib/jqmobile/jquery.mobile.custom.structure.css"/>
-        <link rel="stylesheet" href="../lib/jqmobile/jquery.mobile.custom.theme.min.css" />
+        <link rel="stylesheet" href="../lib/jqmobile/jquery.mobile.custom.theme.css" />
         <script src="../lib/pageTransitionEvents.js"></script>
         <script src="../lib/common.js"></script>
         <link rel="stylesheet" href="../style/myflight.css" />
     </head>
     <body>
         <div data-role="page" id="mainPage" class="bgOne" data-theme="b">
-            <!--<div data-role="content" class="posAbs blurBg"></div>-->
             <div data-role="content">
                 <div class="title">
-                    <div class="font-airchina">
+                    <div class="font-airchina" id="J_flightLogo">
                         <img src="../res/airlogos/air-logo-airchina.png" />
                     </div>
-                    <div class="font-flag">CA 1595</div>
-                    <div class="font-ontime">准时</div>
+                    <div class="font-flag" id="J_flagNum">CA1595</div>
+                    <div class="font-ontime" id="J_timeInfo">准时</div>
                 </div>
             </div>
             <div data-role="content">
                 <div class="flightInfo">
                     <div class="boxs">
-                        <p class="targetPlace">北京</p>
+                        <p class="targetPlace" id="J_startPlace">北京</p>
                         <p class="targetPlan">计划起飞</p>
                         <p class="abordTime">15:00</p>
                         <p class="abordTimeComment">登机时间</p>
-                        <p class="localWeather">28<span>℃</span></p>
+                        <p class="localWeather"><b>28</b><span>℃</span></p>
                         <i class="icon icon_weatherRain posIcon"></i>
-                        <p class="abordTimeBig">15:00</p>
                     </div>
+                    <div class="abordTimeBig" id="J_abordTime">15:00</div>
                 </div>
             </div>
             <div data-role="content">
@@ -45,10 +44,10 @@
                         <p class="abordTime">17:00</p>
                         <p class="targetPlan">预计达到</p>
                         <p class="targetPlace">17:00</p>
-                        <p class="localWeather">28<span>℃</span></p>
+                        <p class="localWeather"><b>28</b><span>℃</span></p>
                         <i class="icon icon_weatherSun posIcon"></i>
-                        <p class="targetName">苏州</p>
                     </div>
+                    <div class="targetName" id="J_targetPlace">苏州</div>
                 </div>
             </div>
             <div data-role="content">
@@ -109,14 +108,14 @@
                 </div>
             </script>
         </div>
-        <div data-role="page" id="smsPage" data-theme="c" class="gateInfo">
+        <div data-role="page" id="smsPage" data-theme="a" class="gateInfo">
             <div data-role="content">
                 <div class="gateHeader">
                     <div class="gateNum">23</div>
                     <div class="gateName">登机口</div>
                     <div class="otherFlights">其余航班</div>
                 </div>
-                <ul class="flightsList">
+                <ul class="flightsList" id="J_flightsInfo">
                     <li>
                         <p>
                             <span class="flyIcon"><img src="../res/airlogos/air_logo_hn.png" /></span>

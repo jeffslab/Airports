@@ -40,6 +40,9 @@ div.fr {
     margin-right: 1rem;
     color: #97ff99;
 }
+.font-onlate {
+    color: #f00;
+}
 .font-airchina {
     left: 2rem;
     top: 0;
@@ -56,7 +59,7 @@ div.fr {
 }
 
 .boxs {
-    padding: 0 12rem;
+    padding: 0 10rem;
     position: relative;
 }
 
@@ -94,10 +97,11 @@ div.fr {
 .boxs .localWeather span {
     font-size: 3.5rem;
 }
-.boxs .abordTimeBig, .targetName {
+.abordTimeBig, .targetName {
+    text-align: center;
+    margin: 0 auto;
     font-size: 11rem;
     font-family: 'roboto';
-    margin-left: -2rem;
 }
 .boxs .targetName {
     font-size: 11rem;
@@ -207,8 +211,7 @@ div.fr {
 
 
 .gateInfo {
-    background:url('../res/bg-flight-2.jpg') no-repeat 0 0 #1b52b2;
-    background-size: 100% 100%;
+    background: url('../res/bg-flight-2.jpg') no-repeat 0 0 #1b52b2;
 }
 .gateHeader {
     padding-top: 2rem;
@@ -235,6 +238,9 @@ div.fr {
 .flightsList {
     margin: 0 auto;
     text-align: center;
+}
+.flightsList li a {
+    text-decoration: none;
 }
 .flightsList li {
     margin: 0 1rem 1rem 0;
