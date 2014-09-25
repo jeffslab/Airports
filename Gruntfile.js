@@ -44,10 +44,13 @@ module.exports = function(grunt) {
                 }]
             },
             css: {
+                options: {
+                    noProcess: ['**/*.{svg,ttf,eot,woff}']
+                },
                 files: [{
                     expand: true,
                     cwd: '.',
-                    src: ['style/**/*.css', 'style/res/*.{svg,ttf,eot,woff}'],
+                    src: ['style/**/*.css', 'style/res/**/*.{svg,ttf,eot,woff}'],
                     dest: 'build'
                 }]
             },
