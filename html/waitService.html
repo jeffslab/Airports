@@ -5,9 +5,11 @@
         <meta charset="utf-8" /> 
         <meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=no"/>
         <link rel="stylesheet" href="../style/index.css"/> 
-        <link rel="stylesheet" href="../lib/jquery.mobile.structure.css"/>
-        <link rel="stylesheet" href="../lib/jquery.mobile.theme.css"/>
-        <script src="../lib/jquery.mobile.js"></script>
+        <script src="../lib/jquery.js"></script>
+        <script src="../lib/jqmobile/jquery.mobile.custom.js"></script>
+        <script src="../lib/iscroll.js"></script>
+        <link rel="stylesheet" href="../lib/jqmobile/jquery.mobile.custom.structure.css"/>
+        <link rel="stylesheet" href="../lib/jqmobile/jquery.mobile.custom.theme.css"/>
         <script>
             (function(){
                 var adjust=function(){
@@ -25,7 +27,24 @@
             }());
         </script>
         <style>
-            
+            .bg-2{
+                width:100%;
+                height:100%;
+                background:url('../res/bg-emergency.jpg') no-repeat left top;
+                -webkit-background-size:cover;
+                background-size:cover;
+                -webkit-transition:all .3s linear; 
+                transition:all .3s linear;
+            } 
+            .bg-3{
+                width:100%;
+                height:100%;
+                background:url('../res/bg-lost.jpg') no-repeat left top;
+                -webkit-background-size:cover;
+                background-size:cover; 
+                -webkit-transition:all .3s linear; 
+                transition:all .3s linear;
+            }
             .bg-1{
                 width:100%;
                 height:100%;
@@ -34,16 +53,11 @@
                 background-position:0 0;
                 -webkit-background-size:cover;
                 background-size:cover;
-                position:fixed;
-                -webkit-transition:all 3s ease;
-                transition:all 3s ease;
-                opacity:1;
                 }
             .wrapper{
                 width:50rem;
                 color:#fff;
                 margin:0 auto;
-                position:relative;
                 z-index:1;
             }
             .wrapper .topicon{
@@ -84,30 +98,102 @@
                 line-height:6rem; 
                 font-size:3.6rem;
                 margin:0 auto;
+                text-shadow:none;
+            }
+            .wrapper .detail .positionMess p{
+                font-weight:bold; 
+            }
+            .wrapper .detail .positionMess .posDetail p{
+                font-size:2.8rem; 
+                line-height:3rem;
+                font-weight:normal;
             }
             .wrapper .btn-down{
                 font-size:6rem; 
                 color:#fff;
                 text-align:center;
-                margin-top:27rem;
+                margin-top:20rem;
             }
-            .page2{
-               transition:all 0.3s ease;
+            .wrapper .detail .list{
+                float:left;
+                width:28rem;
+                border:2px solid #fff;
+                height:12.7rem;
+                text-align:center;
+                font-size:3.2rem;
+                display:block;
+                color:#fff;
+                line-height:12rem;
+            } 
+            .wrapper .detail .notice{
+                float:left; 
+                width:19.1rem;
+                height:12.7rem;
+                margin-left:2rem;
+                border:2px solid #fff;
+                text-align:center;
+                font-size:3.2rem;
+                display:block;
+                color:#fff;
+                line-height:12rem;
             }
-            .bg-2{
+            .wrapper .detail .mess .place{
+                font-size:2.6rem; 
+                line-height:3rem;
+            }  
+            .lost-list{
+                width:56rem;
+                margin:0 auto;
+                padding-top:4rem;
+                display:none;
+            }
+            .lost-list .title{
+                margin-bottom:3.5rem; 
+                overflow:hidden;
+            }
+            .lost-list .title .name{
+                width:42.8rem; 
+                height:12.6rem;
+                float:left;
+                text-align:center;
+                font-size:3.6rem;
+                line-height:12rem;
+                color:#fff;
+                border:2px solid #fff;
+                border-right:none;
+            }
+            .lost-list .title .close-list{
+                width:12.6rem; 
+                height:12.6rem;
+                display:block;
+                float:left;
+                border:2px solid #fff;
+                text-decoration:none;
+                text-align:center;
+            }
+            .lost-list .title .icon_btnClose{
+                font-size:9rem; 
+                color:#fff;
+                line-height:12rem;
+            }
+            .lost-list .table-list{
+                table-layout:fixed; 
                 width:100%;
-                height:100%;
-                position:fixed;
-                z-index:1;
-                background:url('../res/bg-emergency.jpg') no-repeat left top;
-                -webkit-background-size:cover;
-                background-size:cover;
-                opacity:0;
-                -webkit-transition:all 3s ease;
-                transition:all 3s ease;
+                color:#fff;
             }
-            .bg-3{
-            
+            .lost-list thead{
+                font-size:3.2rem; 
+            }
+            .lost-list tbody{
+                font-size:3.0rem; 
+            }
+            .initTranslate{
+                transform:translate3d(0,100%,0);  
+                -webkit-transform:translate3d(0,100%,0);
+            }
+            .scrollTranslate{
+                transform:translate3d(0,0,0);  
+                -webkit-transform:translate3d(0,0,0); 
             }
         </style>
     </head>
@@ -149,8 +235,262 @@
                  <div class="btn-down"><i class="icon icon_btnDown"></i></div>
              </div>
         </div>
-        <div id="page3" data-role="page">
+        <div id="page3" data-role="page" class="bg-3">
+            <div class="wrapper"> 
+                 <div class="topicon">
+                     <i class="icon icon_lost myfonts"></i> 
+                     <h2>失物招领</h2>
+                 </div>
+                 <div class="detail">
+                     <div style="margin-bottom:1.7rem;overflow:hidden;">   
+                         <a id="lostlistshow"class="list" href="javascript:;">近期失物清单</a>
+                         <a class="notice" href="javascript:;">认领须知</a>
+                      </div> 
+                     <a class="call" href="tel:010-8819999">
+                         <i class="icon icon_call"></i>电话咨询 
+                     </a>
+                      <div class="mess">
+                          <p style="font-weight:bold;font-size:3rem;">服务位置</p>
+                          <ul class="place">
+                              <li>T3-C二层到港大厅A出口东侧</li>
+                              <li>T3-C安检后西侧问询柜台内</li>
+                              <li>T3-D二层问讯柜台内</li>
+                              <li>T3-E海关柜台北侧问讯柜台内</li>
+                              </ul>
+                      </div>
+                 </div>
+                 <div class="btn-down"><i class="icon icon_btnDown"></i></div>
+             </div>
+             <div class="lost-list">
+                 <div class="title">
+                     <div class="name">近期失物清单</div>
+                     <a href="javascript:;" class="close-list"><i class="icon icon_btnClose"></i></a>
+                 </div> 
+                 <table class="table-list">
+                     <thead>
+                         <tr>
+                             <th style="width:18.5rem">物品名称</th> 
+                             <th style="width:18.5rem;text-align:center;">捡拾日期</th>
+                             <th style="width:18.5rem;text-align:right">捡拾地</th>
+                         </tr>
+                     </thead>
+                     <tbody>
+                         <tr>
+                             <td>身份证</td>             
+                             <td style="text-align:center;">2014-4-17</td>
+                             <td style="text-align:right;">飞机上</td>    
+                         </tr>
+                         <tr>
+                             <td>xx身份证</td>             
+                             <td style="text-align:center;">2014-4-17</td>
+                             <td style="text-align:right;">飞机上</td>    
+                         </tr>
+                         <tr>
+                             <td>身xx份证</td>             
+                             <td style="text-align:center;">2014-4-17</td>
+                             <td style="text-align:right;">飞机上</td>    
+                         </tr>
+                         <tr>
+                             <td>水壶</td>             
+                             <td style="text-align:center;">2014-4-17</td>
+                             <td style="text-align:right;">飞机上</td>    
+                         </tr>
+                     </tbody>
+                 </table>
+             </div>
         </div>
+        <script>
+            $(document).on('pageinit', '#page1', function () {
+                //$(this).on('swipeleft', function (e) {
+                //    $.mobile.changePage('#page2', {
+                //        transition: 'slide'
+                //    });
+                //});
+                //$(this).find('.btn-down').on('click',function(){
+                //    $.mobile.changePage('#page2',{
+                //        transition:'slideup'
+                //    });
+                //});
+                //$('#page2').find('.btn-down').on('click',function(){
+                //        $.mobile.changePage('#page3',{
+                //        transition:'slideup'
+                //    }); 
+                //});
+                $('#page3').find('#lostlistshow').on('click',function(){
+                    $('#page3 .wrapper').fadeOut(function(){
+                        $('#page3').css('opacity','.8');
+                        $('#page3 .lost-list').fadeIn(); 
+                    });
+                });
+                $('#page3').find('.close-list').on('click',function(){
+                    $('#page3 .lost-list').fadeOut(function(){
+                        $('#page3').css('opacity','1'); 
+                        $('#page3 .wrapper').fadeIn();
+                    }); 
+                });
+                $('#page1 .btn-down').on('click',function(){
+                    var wheight = $(window).height(); 
+                    $('#page2').addClass('initTranslate').css('display','block');
+                    $('#page1').css('-webkit-filter','blur(5px)'); 
+                    setTimeout(function(){
+                        $('#page2').addClass('scrollTranslate'); 
+                        $('#page2').addClass('ui-page').addClass('ui-page-theme-a').addClass('ui-page-active');
+                    },300)
+                }); 
+                $('#page2 .btn-down').on('click',function(){
+                    var wheight = $(window).height(); 
+                    $('#page3').addClass('initTranslate').css('display','block');
+                    $('#page2').css('opacity',0.8); 
+                    setTimeout(function(){
+                        $('#page3').addClass('scrollTranslate'); 
+                        $('#page3').addClass('ui-page').addClass('ui-page-theme-a').addClass('ui-page-active');
+                    },300)
+                }); 
+                //返回角度
+                function GetSlideAngle(dx, dy) {
+                    return Math.atan2(dy, dx) * 180 / Math.PI;
+                }
+
+                //根据起点和终点返回方向 1：向上，2：向下，3：向左，4：向右,0：未滑动
+                function GetSlideDirection(startX, startY, endX, endY) {
+                    var dy = startY - endY;
+                    var dx = endX - startX;
+                    var result = 0;
+
+                    //如果滑动距离太短
+                    if (Math.abs(dx) < 2 && Math.abs(dy) < 2) {
+                        return result;
+                    }
+
+                    var angle = GetSlideAngle(dx, dy);
+                    if (angle >= -45 && angle < 45) {
+                        result = 4;
+                        } else if (angle >= 45 && angle < 135) {
+                        result = 1;
+                        } else if (angle >= -135 && angle < -45) {
+                        result = 2;
+                    }
+                    else if ((angle >= 135 && angle <= 180) || (angle >= -180 && angle < -135)) {
+                        result = 3;
+                    }
+
+                    return result;
+                }
+                var startx,starty,endx,endy;
+                $('#page1').on('touchstart',function(e){
+                    startx = e.originalEvent.targetTouches[0].pageX;
+                    starty = e.originalEvent.targetTouches[0].pageY;
+                });
+                $('#page1').on('touchmove',function(e){
+                    e.preventDefault(); 
+                });
+                $('#page1').on('touchend',function(e){
+                   endx = e.originalEvent.changedTouches[0].pageX; 
+                   endy = e.originalEvent.changedTouches[0].pageY;     
+                    var direction = GetSlideDirection(startx, starty, endx, endy);
+                    var dy = Math.abs(starty - endy);
+                    switch(direction){
+                        case 1:
+                         if(dy>50){pullup('page1','page2');}
+                         break;
+                    }
+                });
+                $('#page2').on('touchstart',function(e){
+                    startx = e.originalEvent.targetTouches[0].pageX;
+                    starty = e.originalEvent.targetTouches[0].pageY;
+                });
+                $('#page2').on('touchmove',function(e){
+                    e.preventDefault(); 
+                });
+                $('#page2').on('touchend',function(e){
+                   endx = e.originalEvent.changedTouches[0].pageX; 
+                   endy = e.originalEvent.changedTouches[0].pageY;     
+                    var direction = GetSlideDirection(startx, starty, endx, endy);
+                    var dy = Math.abs(starty - endy);
+                    switch(direction){
+                        case 1:
+                        if(dy>50){
+                         pullup('page2','page3');
+                            }
+                         break;
+                        case 2:
+                            if(dy>50){
+                             pulldown('page2','page1');
+                            }
+                         break;
+                    }
+                });
+                $('#page3').on('touchstart',function(e){
+                    startx = e.originalEvent.targetTouches[0].pageX;
+                    starty = e.originalEvent.targetTouches[0].pageY;
+                });
+                $('#page3').on('touchmove',function(e){
+                    e.preventDefault(); 
+                });
+                $('#page3').on('touchend',function(e){
+                   endx = e.originalEvent.changedTouches[0].pageX; 
+                   endy = e.originalEvent.changedTouches[0].pageY;     
+                    var direction = GetSlideDirection(startx, starty, endx, endy);
+                    var dy = Math.abs(starty - endy);
+                    switch(direction){
+                        case 2:
+                            if(dy>50){
+                             pulldown('page3','page2');
+                            }
+                         break;
+                    }
+                });
+                function pulldown(targetpage,nextpage){//下滑动作
+                          $('#'+targetpage).removeClass('scrollTranslate');   
+                          setTimeout(function(){
+                              $('#'+targetpage).css('display','none'); 
+                          },300);
+                          $('#'+targetpage).removeClass('ui-page').removeClass('ui-page-theme-a').removeClass('ui-page-active');
+                          $('#'+nextpage).css('-webkit-filter','none')       
+                }
+                function pullup(targetpage,nextpage){ //上滑动作
+                          $('#'+nextpage).addClass('initTranslate').css('display','block');
+                            $('#'+targetpage).css({'-webkit-filter':'blur(3px)'}); 
+                            setTimeout(function(){
+                                $('#'+nextpage).addClass('scrollTranslate');      
+                                $('#'+nextpage).addClass('ui-page').addClass('ui-page-theme-a').addClass('ui-page-active');
+                            },300);
+                }
+                /*$('#page1').on('touchmove',function(e){
+                    endx = e.originalEvent.changedTouches[0].pageX;
+                    endy = e.originalEvent.changedTouches[0].pageY; 
+                    var direction = GetSlideDirection(startx, starty, endx, endy);
+                    switch (direction) {
+                        case 0:
+                        alert("没滑动");
+                        break;
+                        case 1:
+                            $('#page1').css('opacity',0.8);
+                            $('#page1').css('position','fixed');
+                            $('#page2').css({
+                                'display':'block',
+                                'top': $(window).height()-$(window).scrollTop()
+                            });
+                            if($(window).scrollTop()>50){
+                              //  $('#page2').css('top','0px')     
+                            }else{
+                            }
+                        break;
+                        case 2:
+                            $('#page2').css({
+                                'top': $(window).height()-$(window).scrollTop()
+                            });
+                        break;
+                        case 3:
+                        break;
+                        case 4:
+                        break;
+                        default:            
+                    }   
+                });*/
+
+            });
+            </script>
      <body>
 </html>
 
