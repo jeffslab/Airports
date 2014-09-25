@@ -1327,11 +1327,11 @@ li.ui-block-e {
 /* slide up */
 .slideup.out {
 	-webkit-animation-name: fadeout;
-	-webkit-animation-duration: 100ms;
+	-webkit-animation-duration: 16ms;
 	-moz-animation-name: fadeout;
-	-moz-animation-duration: 100ms;
+	-moz-animation-duration: 16ms;
 	animation-name: fadeout;
-	animation-duration: 100ms;
+	animation-duration: 16ms;
 }
 
 .slideup.in {
@@ -1348,11 +1348,11 @@ li.ui-block-e {
 
 .slideup.in.reverse {
 	-webkit-animation-name: fadein;
-	-webkit-animation-duration: 150ms;
+	-webkit-animation-duration: 15ms;
 	-moz-animation-name: fadein;
-	-moz-animation-duration: 150ms;
+	-moz-animation-duration: 15ms;
 	animation-name: fadein;
-	animation-duration: 150ms;
+	animation-duration: 15ms;
 }
 
 .slideup.out.reverse {

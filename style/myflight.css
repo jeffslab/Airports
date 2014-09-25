@@ -148,7 +148,7 @@ div.fr {
 .movie {
 }
 .movie li:first-child div:first-child {
-    margin-top: 5rem;
+    margin-top: 3.5rem;
 }
 .movie li img {
     height: 19.5rem;
