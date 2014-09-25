@@ -6,6 +6,7 @@ html{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pr
          -moz-box-sizing: border-box;
            box-sizing: border-box;
            text-shadow:none;
+         -webkit-user-select: none;
   }
 /*iconfont*/
 @font-face {

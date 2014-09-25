@@ -58,7 +58,6 @@
                 width:50rem;
                 color:#fff;
                 margin:0 auto;
-                z-index:1;
             }
             .wrapper .topicon{
                 text-align:center; 
@@ -124,6 +123,7 @@
                 display:block;
                 color:#fff;
                 line-height:12rem;
+                text-decoration:none;
             } 
             .wrapper .detail .notice{
                 float:left; 
@@ -136,6 +136,7 @@
                 display:block;
                 color:#fff;
                 line-height:12rem;
+                text-decoration:none;
             }
             .wrapper .detail .mess .place{
                 font-size:2.6rem; 
@@ -146,6 +147,7 @@
                 margin:0 auto;
                 padding-top:4rem;
                 display:none;
+                position:relative;
             }
             .lost-list .title{
                 margin-bottom:3.5rem; 
@@ -232,7 +234,7 @@
                          <i class="icon icon_call"></i>呼叫电瓶车 
                      </a>
                  </div>
-                 <div class="btn-down"><i class="icon icon_btnDown"></i></div>
+                 <div class="btn-down" style="margin-top:10rem;"><i class="icon icon_btnDown"></i></div>
              </div>
         </div>
         <div id="page3" data-role="page" class="bg-3">
@@ -259,9 +261,10 @@
                               </ul>
                       </div>
                  </div>
-                 <div class="btn-down"><i class="icon icon_btnDown"></i></div>
+                 <div class="btn-down" style="margin-top:10rem;"><i class="icon icon_btnDown"></i></div>
              </div>
-             <div class="lost-list">
+        </div>
+        <div class="lost-list">
                  <div class="title">
                      <div class="name">近期失物清单</div>
                      <a href="javascript:;" class="close-list"><i class="icon icon_btnClose"></i></a>
@@ -298,54 +301,9 @@
                      </tbody>
                  </table>
              </div>
-        </div>
         <script>
-            $(document).on('pageinit', '#page1', function () {
-                //$(this).on('swipeleft', function (e) {
-                //    $.mobile.changePage('#page2', {
-                //        transition: 'slide'
-                //    });
-                //});
-                //$(this).find('.btn-down').on('click',function(){
-                //    $.mobile.changePage('#page2',{
-                //        transition:'slideup'
-                //    });
-                //});
-                //$('#page2').find('.btn-down').on('click',function(){
-                //        $.mobile.changePage('#page3',{
-                //        transition:'slideup'
-                //    }); 
-                //});
-                $('#page3').find('#lostlistshow').on('click',function(){
-                    $('#page3 .wrapper').fadeOut(function(){
-                        $('#page3').css('opacity','.8');
-                        $('#page3 .lost-list').fadeIn(); 
-                    });
-                });
-                $('#page3').find('.close-list').on('click',function(){
-                    $('#page3 .lost-list').fadeOut(function(){
-                        $('#page3').css('opacity','1'); 
-                        $('#page3 .wrapper').fadeIn();
-                    }); 
-                });
-                $('#page1 .btn-down').on('click',function(){
-                    var wheight = $(window).height(); 
-                    $('#page2').addClass('initTranslate').css('display','block');
-                    $('#page1').css('-webkit-filter','blur(5px)'); 
-                    setTimeout(function(){
-                        $('#page2').addClass('scrollTranslate'); 
-                        $('#page2').addClass('ui-page').addClass('ui-page-theme-a').addClass('ui-page-active');
-                    },300)
-                }); 
-                $('#page2 .btn-down').on('click',function(){
-                    var wheight = $(window).height(); 
-                    $('#page3').addClass('initTranslate').css('display','block');
-                    $('#page2').css('opacity',0.8); 
-                    setTimeout(function(){
-                        $('#page3').addClass('scrollTranslate'); 
-                        $('#page3').addClass('ui-page').addClass('ui-page-theme-a').addClass('ui-page-active');
-                    },300)
-                }); 
+            (function($,document){
+                var startx,starty,endx,endy,listshow=0;
                 //返回角度
                 function GetSlideAngle(dx, dy) {
                     return Math.atan2(dy, dx) * 180 / Math.PI;
@@ -376,7 +334,68 @@
 
                     return result;
                 }
-                var startx,starty,endx,endy;
+                function pulldown(targetpage,nextpage){//下滑动作
+                          $('#'+targetpage).removeClass('scrollTranslate');   
+                          setTimeout(function(){
+                              $('#'+targetpage).css('display','none'); 
+                          },300);
+                          $('#'+targetpage).removeClass('ui-page').removeClass('ui-page-theme-a').removeClass('ui-page-active');
+                          $('#'+nextpage).css('-webkit-filter','none')       
+                }
+                function pullup(targetpage,nextpage){ //上滑动作
+                          $('#'+nextpage).addClass('initTranslate').css('display','block');
+                            $('#'+targetpage).css({'-webkit-filter':'blur(3px)'}); 
+                            setTimeout(function(){
+                                $('#'+nextpage).addClass('scrollTranslate');      
+                                $('#'+nextpage).addClass('ui-page').addClass('ui-page-theme-a').addClass('ui-page-active');
+                            },300);
+                }
+                $(document).on('pageinit', '#page1', function () {
+                //$(this).on('swipeleft', function (e) {
+                //    $.mobile.changePage('#page2', {
+                //        transition: 'slide'
+                //    });
+                //});
+                //$(this).find('.btn-down').on('click',function(){
+                //    $.mobile.changePage('#page2',{
+                //        transition:'slideup'
+                //    });
+                //});
+                //$('#page2').find('.btn-down').on('click',function(){
+                //        $.mobile.changePage('#page3',{
+                //        transition:'slideup'
+                //    }); 
+                //});
+                $('#page3').find('#lostlistshow').on('click',function(){
+                    $('#page3 .wrapper').fadeOut(function(){
+                        $('#page3').css('-webkit-filter','blur(3px)');
+                        $('.lost-list').fadeIn(); 
+                        listshow = 1;
+                    });
+                });
+                $('.close-list').on('click',function(){
+                    $('.lost-list').fadeOut(function(){
+                        $('#page3').css('-webkit-filter','none'); 
+                        $('#page3 .wrapper').fadeIn();
+                        listshow = 0;
+                    }); 
+                });
+                $('#page1 .btn-down').on('click',function(){
+                    $('#page2').addClass('initTranslate').css('display','block');
+                    $('#page1').css('-webkit-filter','blur(5px)'); 
+                    setTimeout(function(){
+                        $('#page2').addClass('scrollTranslate'); 
+                        $('#page2').addClass('ui-page').addClass('ui-page-theme-a').addClass('ui-page-active');
+                    },300)
+                }); 
+                $('#page2 .btn-down').on('click',function(){
+                    $('#page3').addClass('initTranslate').css('display','block');
+                    $('#page2').css('opacity',0.8); 
+                    setTimeout(function(){
+                        $('#page3').addClass('scrollTranslate'); 
+                        $('#page3').addClass('ui-page').addClass('ui-page-theme-a').addClass('ui-page-active');
+                    },300)
+                }); 
                 $('#page1').on('touchstart',function(e){
                     startx = e.originalEvent.targetTouches[0].pageX;
                     starty = e.originalEvent.targetTouches[0].pageY;
@@ -434,28 +453,12 @@
                     var dy = Math.abs(starty - endy);
                     switch(direction){
                         case 2:
-                            if(dy>50){
+                            if(dy>50 && listshow == 0){
                              pulldown('page3','page2');
                             }
                          break;
                     }
                 });
-                function pulldown(targetpage,nextpage){//下滑动作
-                          $('#'+targetpage).removeClass('scrollTranslate');   
-                          setTimeout(function(){
-                              $('#'+targetpage).css('display','none'); 
-                          },300);
-                          $('#'+targetpage).removeClass('ui-page').removeClass('ui-page-theme-a').removeClass('ui-page-active');
-                          $('#'+nextpage).css('-webkit-filter','none')       
-                }
-                function pullup(targetpage,nextpage){ //上滑动作
-                          $('#'+nextpage).addClass('initTranslate').css('display','block');
-                            $('#'+targetpage).css({'-webkit-filter':'blur(3px)'}); 
-                            setTimeout(function(){
-                                $('#'+nextpage).addClass('scrollTranslate');      
-                                $('#'+nextpage).addClass('ui-page').addClass('ui-page-theme-a').addClass('ui-page-active');
-                            },300);
-                }
                 /*$('#page1').on('touchmove',function(e){
                     endx = e.originalEvent.changedTouches[0].pageX;
                     endy = e.originalEvent.changedTouches[0].pageY; 
@@ -490,6 +493,8 @@
                 });*/
 
             });
+            })($,document);
+            
             </script>
      <body>
 </html>
