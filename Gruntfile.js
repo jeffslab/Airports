@@ -9,19 +9,8 @@ var SERVER_PORT = 9966;
     // load all grunt tasks
 module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt);
-    var jadeFiles = {};
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        jade : {
-            compile : {
-                options : {
-                    client : true
-                },
-                files : {
-                    'lib/jade/jade-tmpl.js' : 'template/**/*.jade'
-                }
-            }
-        },
         cache: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n',
         uglify: {
             options: {
@@ -77,7 +66,7 @@ module.exports = function(grunt) {
         jshint: {
             main: {
                 files: {
-                    src: ['**/*.js', '!lib/zepto*.js', '!lib/jqmobile/**/*', '!lib/jquery*.js', '!lib/bootstrap/**/*.js', '!lib/jade/**/*.js', '!build/**/*.js', '!node_modules/**/*.js', '!bower_components/**/*.js']
+                    src: ['**/*.js', '!lib/zepto*.js', '!lib/jqmobile/**/*', '!lib/jquery*.js', '!lib/bootstrap/**/*.js', '!build/**/*.js', '!node_modules/**/*.js', '!bower_components/**/*.js']
                 },
                 options: {
                     //jshintrc: '.jshintrc',
@@ -115,7 +104,7 @@ module.exports = function(grunt) {
             minify: {
                 expand: true,
                 cwd: '.',
-                src: ['style/*.css'],
+                src: ['style/*.css', 'lib/**/*.css'],
                 dest: 'build'
                 //ext: '.min.css'
             }
@@ -134,15 +123,8 @@ module.exports = function(grunt) {
             html: {
                 files: ['html/*.html']
             },
-            jade: {
-                files: ['template/**/*.jade'],
-                tasks: ['jade']
-            },
             css: {
                 files: ['style/*.css']
-            },
-            tmpl: {
-                files: ['lib/jade/jade-template.js']
             },
             options: {
                 livereload: LIVERELOAD_PORT,
@@ -170,7 +152,6 @@ module.exports = function(grunt) {
             'watch'
         ]);
     });
-    grunt.registerTask('pro', ['clean', 'jshint', 'jade', 'copy', 'cssmin', 'uglify']);
+    grunt.registerTask('pro', ['clean', 'jshint', 'copy', 'cssmin', 'uglify']);
     grunt.registerTask('test', ['jshint']);
-    grunt.registerTask('default', ['jade', 'copy']);
 };
