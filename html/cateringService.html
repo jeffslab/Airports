@@ -14,86 +14,262 @@
         html,body{ width: 100%; height: 100%; background: #e4e4e4; 
             -webkit-tap-highlight-color: rgba(88,44,22,0.9);
             -webkit-touch-callout: none; 
-            -webkit-user-select: none; 
+            -webkit-user-select: none;             
         }    
+        div.hide{display:none}
         .main{ width: 100%; height: auto; position: relative;}
         .main section{ width: 100%; height: auto; position:absolute; left: 0; top:0; }
+        .main section div{ width: 100%;left: 0; top:0; }
         .main section.hide{ display: none;}
         .main section.curr{ display: block;} 
     
         .menu{ width: 100%; height: 60px; position: fixed; bottom:0; left:0; }
         .menu.menucurr{ background: #fff;}
         .menu ul{width: 100%; height: 100%; }
-        .menu li{ width: 16.6%; height: 100%; float: left; line-height: 60px; text-align: center; background: #000; color:#fff;}
-        .menu li.curr{ }   
+        .menu li{ width: 16.66%; height: 100%; float: left; line-height: 6rem; text-align: center; background: #fff; font-size:6rem;color:#999}
+        .menu li.curr{color:#000}   
+        
+        .detail_menu{ width: 100%; height: 5rem; position: fixed; bottom:0; left:0; }
+        .detail_menu ul{width: 100%; height: 100%; }
+        .detail_menu li{ width: 33.3%; height: 100%; float: left; line-height: 6rem; text-align: center; background: #000; color:#fff;font-size:6rem;color:#fff}
+        
+        .detail{width: 100%; height: auto; position: relative;}
+        .detail hr{width:100%;color:#999;size:1;}        
+        .filter{filter:alpha(opacity=50);-moz-opacity:0.5;-khtml-opacity: 0.5;opacity: 0.5;}
+        .bottom{width:100%;height: 5rem;}
+        .loading{width:5rem;height:5rem;color:#000;}
+        .main_mask{position:absolute; width:100%;height:100%;filter:alpha(opacity=50);-moz-opacity:0.5;-khtml-opacity: 0.5;opacity: 0.5;color:#fff}
+         
     </style>
+
+    <script>
+        (function () {
+            var adjust = function () {
+                var width, dom = document.getElementsByTagName("html")[0];
+                return function () {
+                    var w = Math.min(dom.offsetWidth, 480);
+                    if (width != w) {
+                        width = w;
+                        dom.style.fontSize = (10 / 720 * width) + "px";
+                    }
+                };
+            } ();
+            adjust();
+            window.addEventListener("resize", function () { setTimeout(adjust, 200); }, false);
+        } ());
+    </script>
 </head>
 <body>    
     <div class="main">
-        <section class="curr">
-            <img src="../res/menu-1/menu-1-shop-1/picture-0.jpg" alt="">
-            <img src="../res/menu-1/menu-1-shop-1/picture-0.jpg" alt="">
-            <img src="../res/menu-1/menu-1-shop-1/picture-0.jpg" alt="">
-            <img src="../res/menu-1/menu-1-shop-1/picture-0.jpg" alt="">
-            <img src="../res/menu-1/menu-1-shop-1/picture-0.jpg" alt="">
-            <img src="../res/menu-1/menu-1-shop-1/picture-0.jpg" alt="">
-            <img src="../res/menu-1/menu-1-shop-1/picture-0.jpg" alt="">
-            <img src="../res/menu-1/menu-1-shop-1/picture-0.jpg" alt="">
-            <img src="../res/menu-1/menu-1-shop-1/picture-0.jpg" alt="">
-            <img src="../res/menu-1/menu-1-shop-1/picture-0.jpg" alt="">
-            <img src="../res/menu-1/menu-1-shop-1/picture-0.jpg" alt="">
-            <img src="../res/menu-1/menu-1-shop-1/picture-0.jpg" alt="">
-        </section>
-        <section  class="hide">
-            <img src="../res/menu-1/menu-1-shop-2/picture-0.jpg" alt="">
-            <img src="../res/menu-1/menu-1-shop-2/picture-0.jpg" alt="">
-            <img src="../res/menu-1/menu-1-shop-2/picture-0.jpg" alt="">
-            <img src="../res/menu-1/menu-1-shop-2/picture-0.jpg" alt="">
-        </section>
-        <section class="hide">
-            <img src="../res/menu-1/menu-1-shop-3/picture-0.jpg" alt="">
-            <img src="../res/menu-1/menu-1-shop-3/picture-0.jpg" alt="">
-            <img src="../res/menu-1/menu-1-shop-3/picture-0.jpg" alt="">
-            <img src="../res/menu-1/menu-1-shop-3/picture-0.jpg" alt="">
-        </section>
-        <section class="hide">
-            <img src="../res/menu-1/menu-1-shop-4/picture-0.jpg" alt="">
-            <img src="../res/menu-1/menu-1-shop-4/picture-0.jpg" alt="">
-            <img src="../res/menu-1/menu-1-shop-4/picture-0.jpg" alt="">
-            <img src="../res/menu-1/menu-1-shop-4/picture-0.jpg" alt="">
-        </section>
-        <section class="hide">
-            <img src="../res/menu-1/menu-1-shop-5/picture-0.jpg" alt="">
-            <img src="../res/menu-1/menu-1-shop-5/picture-0.jpg" alt="">
-            <img src="../res/menu-1/menu-1-shop-5/picture-0.jpg" alt="">
-            <img src="../res/menu-1/menu-1-shop-5/picture-0.jpg" alt="">
-        </section>
-        <section class="hide">
-            <img src="../res/menu-1/menu-1-shop-6/picture-0.jpg" alt="">
-            <img src="../res/menu-1/menu-1-shop-6/picture-0.jpg" alt="">
-            <img src="../res/menu-1/menu-1-shop-6/picture-0.jpg" alt="">
-            <img src="../res/menu-1/menu-1-shop-6/picture-0.jpg" alt="">
-        </section>
+        <div class="maindiv">
+            <section class="curr" id="sec-menu-all">          
+            </section>
+            <section  class="hide" id="sec-menu-1">           
+            </section>
+            <section class="hide" id="sec-menu-2">            
+            </section>
+            <section class="hide" id="sec-menu-3">            
+            </section>
+            <section class="hide" id="sec-menu-4">            
+            </section>
+            <section class="hide" id="sec-menu-5">
+            </section>
+            <div class="bottom"></div>
+        </div>
+    </div>    
+    <div class="detail hide">
+        <img id="detail_img" src="../res/menu-1/shop-1/picture-1.jpg" style="max-width:100%;" alt=""/>
+        <div style="vertical-align:middle;line-height:3rem">
+          <div style="margin: 1rem 0 0 1rem">
+            <span id="detail_name" style="font-size:6rem;font-family:@黑体;font-weight:bold;">太平洋咖啡</span>
+          </div>          
+          <img style="width:7rem;height:1.1rem;margin: 0 0 1rem 1rem" src="../res/score.png" alt=""/>          
+        </div>
+        <hr />
+        <div style="vertical-align:middle;line-height:4rem">
+          <span style="font-size:3rem;font-family:@黑体;margin-left:1rem">距离50米 人均￥40 时间 5:00-23:00</span>
+        </div>
+        <hr />
+        <div style="text-align:center;vertical-align:middle;line-height:4rem">
+          <div id="made_call">              
+                <i class="icon icon_telephone" style="color:#fff;font-size:5rem;color:#999;"></i>
+                <span style="font-size:3.6rem;font-family:Arial;color:#999;">&nbsp;&nbsp;010 - 68789876&nbsp;&nbsp;</span>
+                <i class="icon icon_call" style="color:#fff;font-size:5rem;color:#999;"></i>                            
+          </div>
+        </div>
+        <hr />
+        <img src="../res/map-1.jpg" alt="" style="max-width: 100%; display: block;" alt=""/>
+        <div class="bottom"></div>
     </div>
-<div class="menu">
-    <ul>
-        <li class="curr icon icon_menuNear "></li>
-        <li class="icon icon_dutyFree "></li>
-        <li class="icon icon_menuFood "></li>
-        <li class="icon icon_menuCoffee "></li>
-        <li class="icon icon_menuRestaurant "></li>
-        <li class="icon icon_menuShop "></li>
-    </ul>
-</div>
+
+    <div class="menu">
+        <ul>
+            <li class="curr icon icon_menuNear "></li>
+            <li class="icon icon_dutyFree "></li>
+            <li class="icon icon_menuFood "></li>
+            <li class="icon icon_menuCoffee "></li>
+            <li class="icon icon_menuRestaurant "></li>
+            <li class="icon icon_menuShop "></li>
+        </ul>
+    </div>
+    <div class="detail_menu hide">
+        <ul>
+            <li class="icon icon_btnDown "></li>
+            <li class="icon icon_btnDown "></li>
+            <li class="icon icon_btnDown "></li>            
+        </ul>
+    </div>
 </body>
 <script>
-    $(function () {
-        $(".menu li").each(function (index) {
-            $(this).tap(function () {
-                $(this).addClass("curr").siblings().removeClass("curr");
-                $(".main section").eq(index).show().siblings().hide();
-            })
+
+    $(document).ready(function () {
+
+        var isLoading = false;
+        var imgMap = {};
+        var imgData = [{
+            class: 'sec-menu-1',
+            path: '../res/menu-1/',
+            sub: 'shop-',
+            pic_pre: 'picture-',
+            len: 5,
+            names: ['太平洋咖啡', 'KFC', '麦当劳', '千岛咖啡', '真功夫']
+        }, {
+            class: 'sec-menu-2',
+            path: '../res/menu-2/',
+            sub: 'shop-',
+            pic_pre: 'picture-',
+            len: 6,
+            names: ['太平洋咖啡', 'KFC', '麦当劳', '千岛咖啡', '真功夫', '味千拉面']
+        }, {
+            class: 'sec-menu-3',
+            path: '../res/menu-3/',
+            sub: 'shop-',
+            pic_pre: 'picture-',
+            len: 6,
+            names: ['太平洋咖啡', 'KFC', '麦当劳', '千岛咖啡', '真功夫', '味千拉面']
+        }, {
+            class: 'sec-menu-4',
+            path: '../res/menu-4/',
+            sub: 'shop-',
+            pic_pre: 'picture-',
+            len: 6,
+            names: ['太平洋咖啡', 'KFC', '麦当劳', '千岛咖啡', '真功夫', '味千拉面']
+        }, {
+            class: 'sec-menu-5',
+            path: '../res/menu-5/',
+            sub: 'shop-',
+            pic_pre: 'picture-',
+            len: 6,
+            names: ['太平洋咖啡', 'KFC', '麦当劳', '千岛咖啡', '真功夫', '味千拉面']
+        }, {
+            class: 'sec-menu-6',
+            path: '../res/menu-6/',
+            sub: 'shop-',
+            pic_pre: 'picture-',
+            len: 6,
+            names: ['太平洋咖啡', 'KFC', '麦当劳', '千岛咖啡', '真功夫', '味千拉面']
+        }]
+
+        $.each(imgData, function (index, item) {
+            imgMap[item.class] = item;
         })
-    })
+
+        function loadTarget(id) {
+            isLoading = true;
+            var img = $('#' + id);
+            var parentDIv = img.parent('div')
+            if (parentDIv) {
+                var loading = '<img class="loading filter" src="../res/ajax-loader.gif" alt=""/>';
+                parentDIv.append(loading);
+            }
+            loadDetail(id);
+            setTimeout(function () {
+                isLoading = false;
+                parentDIv.children('.loading').remove();
+                showDetail(id);
+            }, 1000)
+        }
+
+        function showDetail() {
+            $('.main').addClass('hide');
+            $('.menu').addClass('hide');
+            $('.detail').removeClass('hide');
+            $('.detail_menu').removeClass('hide');
+            $('.maindiv').addClass('main_mask');            
+        }
+
+        function loadDetail(id) {
+            var args = id.split('_');
+            var cls = args[1];
+            var index = parseInt(args[2]);
+            var imgObj = imgMap[cls];
+            var name = imgObj.names[index];
+            var imgSrc = imgObj.path + imgObj.sub + (index + 1) + '/picture-1.jpg';
+
+            $('#detail_name').html(name);
+            $('#detail_img').attr('src', imgSrc);
+        }
+
+        function showMain() {
+            $('.main').removeClass('hide');
+            $('.menu').removeClass('hide');
+            $('.detail').addClass('hide');
+            $('.detail_menu').addClass('hide');
+            $('.maindiv').removeClass('main_mask');
+        }
+
+        function initDom() {
+            var sectionAll = $('#sec-menu-all');
+            $(imgData).each(function (index) {
+                var item = imgData[index];
+                var par = $('#' + item.class);
+                if (par) {
+                    for (var i = 0; i < item.len; i++) {
+                        var imgPath = item.path + item.sub + (i + 1) + '/' + item.pic_pre + '0.jpg';
+                        var imgId = 'img_' + item.class + '_' + i;
+                        var img = '<div><img src="' + imgPath + '" alt="" id="' + imgId + '"></div>';
+                        $(img).die().live('tap', function (e) {
+                            var targetId = e.target.id;
+                            if (targetId && !isLoading) {
+                                loadTarget(targetId)
+                            }
+                        })
+                        $(img).die().live('click', function (e) {
+                            var targetId = e.target.id;
+                            if (targetId && !isLoading) {
+                                loadTarget(targetId)
+                            }
+                        })
+                        sectionAll.append(img);
+                        par.append(img);
+                    }
+                }
+            })
+        }
+
+        function menuEvent() {
+            $(".menu li").each(function (index) {
+                $(this).tap(function () {
+                    $(this).addClass("curr").siblings().removeClass("curr");
+                    $(".main section").eq(index).show().siblings().hide();
+                })
+            })
+
+            $(".detail_menu li").each(function (index) {
+                $(this).tap(function () {
+                    setTimeout(function () {
+                        showMain();
+                    }, 200)
+                })
+            })
+        }
+
+        initDom();
+        menuEvent();
+
+    });
+
+
+    
 </script>
 </html>
