@@ -128,7 +128,10 @@ div.fr {
     width: 19.7rem;
     display: inline-block;
     vertical-align: middle;
-    margin: 0 1rem 1rem 0;
+    margin-bottom: 1rem;
+}
+.fourInfos li:nth-of-type(odd) {
+    margin-right: 1rem;
 }
 .fourInfos li:first-child p:first-child {
     margin-top: 2rem;
@@ -243,12 +246,15 @@ div.fr {
     text-decoration: none;
 }
 .flightsList li {
-    margin: 0 1rem 1rem 0;
+    margin-bottom: 1rem;
     background: #fff;
     display: inline-block;
     width: 20rem;
     height: 20rem;
     position: relative;
+}
+.flightsList li:nth-of-type(odd) {
+    margin-right: 1rem;
 }
 .timeInfo {
     position: absolute;
