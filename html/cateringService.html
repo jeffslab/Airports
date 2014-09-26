@@ -205,7 +205,7 @@
             var imgObj = imgMap[cls];
             var name = imgObj.names[index];
             var imgSrc = imgObj.path + imgObj.sub + (index + 1) + '/picture-1.jpg';
-            $('.detail').css('top', 'auto');         
+            $('.detail').css('top', 'auto');
             $('#detail_name').html(name);
             $('#detail_img').attr('src', imgSrc);
         }
@@ -213,7 +213,7 @@
         function showMain() {
             $('.main').removeClass('hide');
             var top = 0;
-            var timer = setInterval(function () {                
+            var timer = setInterval(function () {
                 $('.detail').css('top', top -= 20);
                 if (top < -1000) {
                     clearInterval(timer)
@@ -223,7 +223,7 @@
                     //$('.maindiv').removeClass('main_mask');
                 }
             }, 10)
-            
+
         }
 
         function initDom() {
@@ -236,18 +236,14 @@
                         var imgPath = item.path + item.sub + (i + 1) + '/' + item.pic_pre + '0.jpg';
                         var imgId = 'img_' + item.class + '_' + i;
                         var img = '<div><img src="' + imgPath + '" alt="" id="' + imgId + '"></div>';
+
                         $(img).die().live('tap', function (e) {
                             var targetId = e.target.id;
                             if (targetId && !isLoading) {
                                 loadTarget(targetId)
                             }
                         })
-                        $(img).die().live('click', function (e) {
-                            var targetId = e.target.id;
-                            if (targetId && !isLoading) {
-                                loadTarget(targetId)
-                            }
-                        })
+
                         sectionAll.append(img);
                         par.append(img);
                     }
@@ -263,13 +259,13 @@
                 })
             })
 
-//            $(".detail_menu li").each(function (index) {
-//                $(this).tap(function () {
-//                    setTimeout(function () {
-//                        showMain();
-//                    }, 200)
-//                })
-//            })
+            //            $(".detail_menu li").each(function (index) {
+            //                $(this).tap(function () {
+            //                    setTimeout(function () {
+            //                        showMain();
+            //                    }, 200)
+            //                })
+            //            })
 
             $('.detail').swipeUp(function () {
                 setTimeout(function () {
