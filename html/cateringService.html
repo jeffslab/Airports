@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1 user-scalable=0"/>    
     <script src="../lib/zepto.js"></script>
+    <script src="../lib/swipe.js"></script>
     <link rel="stylesheet" href="../style/index.css"/>
 
     <style>   
@@ -23,23 +24,46 @@
         .main section.hide{ display: none;}
         .main section.curr{ display: block;} 
     
-        .menu{ width: 100%; height: 6rem; position: fixed; bottom:0; left:0; }
+        .menu{ width: 100%; height: 12rem; position: fixed; bottom:0; left:0; }
         .menu.menucurr{ background: #fff;}
         .menu ul{width: 100%; height: 100%; }
-        .menu li{ width: 16.66%; height: 100%; float: left; line-height: 6rem; text-align: center; background: #fff; font-size:6rem;color:#999}
+        .menu li{ width: 16.66%; height: 100%; float: left; line-height: 12rem; text-align: center; background: #fff; font-size:6rem;color:#999}
         .menu li.curr{color:#000}   
         
         .detail_menu{ width: 100%; height: 5rem; position: fixed; bottom:0; left:0; }
         .detail_menu ul{width: 100%; height: 100%; }
         .detail_menu li{ width: 33.3%; height: 100%; float: left; line-height: 6rem; text-align: center; background: #000; color:#fff;font-size:6rem;color:#fff}
         
-        .detail{width: 100%; height: auto; position: relative;}
-        .detail hr{width:100%;color:#999;size:1;}        
+        .detail{width: 100%; height: 100%; position:relative;top:0;left:0;}
+        .detail hr{width:100%;color:#999;size:1;}       
         .filter{filter:alpha(opacity=50);-moz-opacity:0.5;-khtml-opacity: 0.5;opacity: 0.5;}
         .bottom{width:100%;height: 5rem;}
-        .loading{width:5rem;height:5rem;color:#000;}
+        .loading{color:#000;position:absolute;width:100%;top:0;bottom:0;text-align:center;background-image:url('../res/ajax-loader.gif');background-color:rgba(0,0,0,0.8);background-position:center;background-repeat:no-repeat}
+        .loading img{width:2.7rem;height:2.7rem;position:absolute;top:0;left:0;right:0;bottom:0}
         .main_mask{position:absolute; width:100%;height:100%;filter:alpha(opacity=50);-moz-opacity:0.5;-khtml-opacity: 0.5;opacity: 0.5;color:#fff}
-         
+        .muti_img{position:relative;}
+        
+        
+        
+        /* Swipe 2 required styles */
+
+        .swipe {
+          overflow: hidden;
+          visibility: hidden;
+          position: relative;
+        }
+        .swipe-wrap {
+          overflow: hidden;
+          position: relative;
+        }
+        .swipe-wrap > div {
+          float:left;
+          width:100%;
+          position: relative;
+        }
+
+        
+       /* END required styles */
     </style>
 
     <script>
@@ -59,8 +83,8 @@
         } ());
     </script>
 </head>
-<body>    
-    <div class="main">
+<body>       
+    <div class="main">        
         <div class="maindiv">
             <section class="curr" id="sec-menu-all">          
             </section>
@@ -73,33 +97,38 @@
             <section class="hide" id="sec-menu-4">            
             </section>
             <section class="hide" id="sec-menu-5">
-            </section>  
-            <div class="bottom"></div>       
+            </section>               
         </div>        
     </div>    
-    <div class="detail hide">
-        <img id="detail_img" src="../res/menu-1/shop-1/picture-1.jpg" style="max-width:100%;" alt=""/>
-        <div style="vertical-align:middle;line-height:3rem">
-          <div style="margin: 1rem 0 0 1rem">
+    <div class="detail hide">        
+        <div id='mySwipe' style='max-width:100%;' class='swipe'>
+          <div class='swipe-wrap'>
+            <div><img src="../res/menu-1/shop-1/picture-1.jpg" alt=""/></div>
+            <div><img src="../res/menu-1/shop-1/picture-2.jpg" alt=""/></div>
+            <div><img src="../res/menu-1/shop-1/picture-3.jpg" alt=""/></div>
+            <div><img src="../res/menu-1/shop-1/picture-4.jpg" alt=""/></div>            
+          </div>
+        </div>        
+        <div style="vertical-align:middle;line-height:7rem">
+          <div style="margin: 5rem 0 0 5rem">
             <span id="detail_name" style="font-size:6rem;font-family:@黑体;font-weight:bold;">太平洋咖啡</span>
           </div>          
-          <img style="width:7rem;height:1.1rem;margin: 0 0 1rem 1rem" src="../res/score.png" alt=""/>          
+          <img style="width:15rem;height:3rem;margin: 0 0 5rem 5rem" src="../res/score.png" alt=""/>          
         </div>
         <hr />
-        <div style="vertical-align:middle;line-height:4rem">
-          <span style="font-size:3rem;font-family:@黑体;margin-left:1rem">距离50米 人均￥40 时间 5:00-23:00</span>
+        <div style="vertical-align:middle;line-height:12rem">
+          <span style="font-size:3.6rem;font-family:@黑体;margin-left:5rem">距离50米  人均￥40  时间 5:00-23:00</span>
         </div>
         <hr />
-        <div style="text-align:center;vertical-align:middle;line-height:4rem">
-          <div id="made_call">              
+        <div style="text-align:left;vertical-align:middle;line-height:12rem">
+          <div style="margin-left:5rem">              
                 <i class="icon icon_telephone" style="color:#fff;font-size:5rem;color:#999;"></i>
-                <span style="font-size:3.6rem;font-family:Arial;color:#999;">&nbsp;&nbsp;010 - 68789876&nbsp;&nbsp;</span>
-                <i class="icon icon_call" style="color:#fff;font-size:5rem;color:#999;"></i>                            
-          </div>
+                <a href="tel:010-68789876" style="font-size:5rem;font-family:Arial;color:#999;text-decoration:none;">&nbsp;&nbsp;010 - 68789876&nbsp;&nbsp;</a>                                            
+                <i class="icon icon_telephone" style="margin-left:12rem; font-size:5rem;color:#999;"></i>
+          </div>          
         </div>
         <hr />
-        <img src="../res/map-1.jpg" alt="" style="max-width: 100%; display: block;" alt=""/>
-        <div class="bottom"></div>
+        <img src="../res/map-1.jpg" alt="" style="max-width: 100%; display: block;"/>        
     </div>
 
     <div class="menu">
@@ -123,7 +152,6 @@
 <script>
 
     $(document).ready(function () {
-
         var isLoading = false;
         var imgMap = {};
         var imgData = [{
@@ -179,7 +207,7 @@
             var img = $('#' + id);
             var parentDIv = img.parent('div')
             if (parentDIv) {
-                var loading = '<img class="loading filter" src="../res/ajax-loader.gif" alt=""/>';
+                var loading = '<div class="loading"></div>';
                 parentDIv.append(loading);
             }
             loadDetail(id);
@@ -194,8 +222,15 @@
             $('.main').addClass('hide');
             $('.menu').addClass('hide');
             $('.detail').removeClass('hide');
-            //$('.detail_menu').removeClass('hide');
-            //$('.maindiv').addClass('main_mask');
+
+            var elem = document.getElementById('mySwipe');
+            window.mySwipe = Swipe(elem, {
+                startSlide: 0,
+                auto: 3000,
+                continuous: true,
+                disableScroll: true,
+                stopPropagation: true
+            });
         }
 
         function loadDetail(id) {
@@ -203,27 +238,23 @@
             var cls = args[1];
             var index = parseInt(args[2]);
             var imgObj = imgMap[cls];
+
             var name = imgObj.names[index];
-            var imgSrc = imgObj.path + imgObj.sub + (index + 1) + '/picture-1.jpg';
-            $('.detail').css('top', 'auto');
             $('#detail_name').html(name);
-            $('#detail_img').attr('src', imgSrc);
+
+            var swip = $('.swipe-wrap');
+            swip.children('div').remove();
+            for (var i = 0; i < 4; i++) {
+                var imgSrc = imgObj.path + imgObj.sub + (index + 1) + '/picture-' + (i + 1) + '.jpg';
+                var swipImg = '<div><img src="' + imgSrc + '" alt=""/></div>';
+                swip.append(swipImg);
+            }
         }
 
         function showMain() {
             $('.main').removeClass('hide');
-            var top = 0;
-            var timer = setInterval(function () {
-                $('.detail').css('top', top -= 20);
-                if (top < -1000) {
-                    clearInterval(timer)
-                    $('.menu').removeClass('hide');
-                    $('.detail').addClass('hide');
-                    //$('.detail_menu').addClass('hide');
-                    //$('.maindiv').removeClass('main_mask');
-                }
-            }, 10)
-
+            $('.menu').removeClass('hide');
+            $('.detail').addClass('hide');
         }
 
         function initDom() {
@@ -235,7 +266,7 @@
                     for (var i = 0; i < item.len; i++) {
                         var imgPath = item.path + item.sub + (i + 1) + '/' + item.pic_pre + '0.jpg';
                         var imgId = 'img_' + item.class + '_' + i;
-                        var img = '<div><img src="' + imgPath + '" alt="" id="' + imgId + '"></div>';
+                        var img = '<div class="muti_img"><img src="' + imgPath + '" alt="" id="' + imgId + '"></div>';
 
                         $(img).die().live('tap', function (e) {
                             var targetId = e.target.id;
@@ -259,24 +290,13 @@
                 })
             })
 
-            //            $(".detail_menu li").each(function (index) {
-            //                $(this).tap(function () {
-            //                    setTimeout(function () {
-            //                        showMain();
-            //                    }, 200)
-            //                })
-            //            })
-
-            $('.detail').swipeUp(function () {
-                setTimeout(function () {
-                    showMain();
-                }, 200)
+            $('.detail').swipeUp(function () {                
+                showMain();
             })
         }
 
         initDom();
         menuEvent();
-
     });
 
 
