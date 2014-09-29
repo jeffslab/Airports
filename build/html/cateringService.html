@@ -240,7 +240,7 @@
             imgMap[item.class] = item;
         })
 
-        function swipeMenu(isRight) {
+        function swipeMenu(isRight) {            
             menuIndex = isRight ? menuIndex + 1 : menuIndex - 1;
             if (menuIndex > menuLength) menuIndex = 0;
             if (menuIndex < 0) menuIndex = menuLength;
@@ -248,7 +248,9 @@
             if (lis) {
                 lis.removeClass("curr");
                 $(lis[menuIndex]).addClass("curr");
-                $(".main section").siblings().hide().eq(menuIndex).show();
+                $(".main section").siblings().hide();
+                var menuId = menuIndex == 0 ? 'all' : menuIndex;
+                $("#sec-menu-" + menuId).show();
             }
         }
 
