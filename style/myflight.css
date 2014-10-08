@@ -1,18 +1,17 @@
-.bgOne {
-    background:url('../res/bg-flight.jpg') no-repeat 0 0 #1b52b2 fixed;
-    /*-webkit-filter: blur(2px);*/
-}
-.posAbs {
+.posAbsBg, .posAbsSmsPage {
     position: absolute;
-    z-index: 5;
-    padding: 0 3rem;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+.posAbsBg {
+    background:url('../res/bg-flight.jpg') no-repeat 0 0 fixed;
+}
+.posAbsSmsPage {
+    background:url('../res/bg-flight-2.jpg') no-repeat 0 0 fixed;
 }
 div.fr {
     float: right;
-}
-.blurBg, .posAbs {
-    width: 100%;
-    height: 100%;
 }
 .title {
     height: 10rem;
@@ -113,8 +112,8 @@ div.fr {
 }
 .fourInfos {
     text-align: center;
-    padding-bottom: 2rem;
-    margin-top: 1rem;
+    padding-bottom: 2.5rem;
+    margin-top: 2rem;
 }
 .fourInfos li img {
     width: 100%;
@@ -189,7 +188,7 @@ div.fr {
     height: 12rem;
 }
 .nextPage {
-	-webkit-animation: slideUp 2s infinite linear;
+	-webkit-animation: slideUp 1s infinite linear;
     position: absolute;
     left: 50%;
     margin-left: -2.5rem;

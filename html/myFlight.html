@@ -14,88 +14,90 @@
         <link rel="stylesheet" href="../style/myflight.css" />
     </head>
     <body>
-        <div data-role="page" id="mainPage" class="bgOne" data-theme="b">
-            <div data-role="content">
-                <div class="title">
-                    <div class="font-airchina" id="J_flightLogo">
-                        <img src="../res/airlogos/air-logo-airchina.png" />
+        <div data-role="page" id="mainPage" data-theme="b">
+            <div class="posAbsBg">
+                <div data-role="content">
+                    <div class="title">
+                        <div class="font-airchina" id="J_flightLogo">
+                            <img src="../res/airlogos/air-logo-airchina.png" />
+                        </div>
+                        <div class="font-flag" id="J_flagNum">CA1595</div>
+                        <div class="font-ontime" id="J_timeInfo">准时</div>
                     </div>
-                    <div class="font-flag" id="J_flagNum">CA1595</div>
-                    <div class="font-ontime" id="J_timeInfo">准时</div>
-                </div>
-                <div class="spaceLine"></div>
-            </div>
-            <div data-role="content">
-                <div class="flightInfo">
-                    <div class="boxs">
-                        <p class="targetPlace" id="J_startPlace">北京</p>
-                        <p class="targetPlan">计划起飞</p>
-                        <p class="abordTime">15:00</p>
-                        <p class="abordTimeComment">登机时间</p>
-                        <p class="localWeather"><b>28</b><span>℃</span></p>
-                        <i class="icon icon_weatherRain posIcon"></i>
-                    </div>
-                    <div class="abordTimeBig" id="J_abordTime">15:00</div>
                     <div class="spaceLine"></div>
                 </div>
-            </div>
-            <div data-role="content">
-                <div class="flightInfo">
-                    <div class="boxs">
-                        <p class="targetPlan">计划达到</p>
-                        <p class="abordTime">17:00</p>
-                        <p class="targetPlan">预计达到</p>
-                        <p class="targetPlace">17:00</p>
-                        <p class="localWeather"><b>28</b><span>℃</span></p>
-                        <i class="icon icon_weatherSun posIcon"></i>
+                <div data-role="content">
+                    <div class="flightInfo">
+                        <div class="boxs">
+                            <p class="targetPlace" id="J_startPlace">北京</p>
+                            <p class="targetPlan">计划起飞</p>
+                            <p class="abordTime">15:00</p>
+                            <p class="abordTimeComment">登机时间</p>
+                            <p class="localWeather"><b>28</b><span>℃</span></p>
+                            <i class="icon icon_weatherRain posIcon"></i>
+                        </div>
+                        <div class="abordTimeBig" id="J_abordTime">15:00</div>
+                        <div class="spaceLine"></div>
                     </div>
-                    <div class="targetName" id="J_targetPlace">苏州</div>
+                </div>
+                <div data-role="content">
+                    <div class="flightInfo">
+                        <div class="boxs">
+                            <p class="targetPlan">计划达到</p>
+                            <p class="abordTime">17:00</p>
+                            <p class="targetPlan">预计达到</p>
+                            <p class="targetPlace">17:00</p>
+                            <p class="localWeather"><b>28</b><span>℃</span></p>
+                            <i class="icon icon_weatherSun posIcon"></i>
+                        </div>
+                        <div class="targetName" id="J_targetPlace">苏州</div>
+                        <div class="spaceLine"></div>
+                    </div>
+                </div>
+                <div data-role="content">
+                    <ul class="fourInfos food">
+                        <li>
+                            <p><i class="icon icon_food"></i></p>
+                            <p>本次航班</p>
+                            <p>餐饮菜单</p>
+                        </li>
+                        <li><img src="../res/food-1.jpg"></li>
+                        <li><img src="../res/food-2.jpg"></li>
+                        <li><img src="../res/food-3.jpg"></li>
+                    </ul>
                     <div class="spaceLine"></div>
                 </div>
-            </div>
-            <div data-role="content">
-                <ul class="fourInfos food">
-                    <li>
-                        <p><i class="icon icon_food"></i></p>
-                        <p>本次航班</p>
-                        <p>餐饮菜单</p>
-                    </li>
-                    <li><img src="../res/food-1.jpg"></li>
-                    <li><img src="../res/food-2.jpg"></li>
-                    <li><img src="../res/food-3.jpg"></li>
-                </ul>
-                <div class="spaceLine"></div>
-            </div>
-            <div data-role="content">
-                <ul class="fourInfos movie">
-                    <li>
-                        <div><i class="icon icon_movie"></i></div>
-                        <div>本次航班</div>
-                        <div>播放电影</div>
-                    </li>
-                    <li>
-                        <img src="../res/movie-1.jpg">
-                        <p>环太平洋</p>
-                    </li>
-                    <li>
-                        <img src="../res/movie-2.jpg">
-                        <p>碟中谍2</p>
-                    </li>
-                    <li>
-                        <img src="../res/movie-3.jpg">
-                        <p>环形使者</p>
-                    </li>
-                </ul>
-                <div class="spaceLine"></div>
-            </div>
-            <div data-role="content">
-                <div class="smsBox">
-                    <a href="javascript: void(0)" id="J_smsMe"><i class="icon icon_sms" style="font-size: 3rem;margin-top: -1rem;"></i> 短信通知我</a>
+                <div data-role="content">
+                    <ul class="fourInfos movie">
+                        <li>
+                            <div><i class="icon icon_movie"></i></div>
+                            <div>本次航班</div>
+                            <div>播放电影</div>
+                        </li>
+                        <li>
+                            <img src="../res/movie-1.jpg">
+                            <p>环太平洋</p>
+                        </li>
+                        <li>
+                            <img src="../res/movie-2.jpg">
+                            <p>碟中谍2</p>
+                        </li>
+                        <li>
+                            <img src="../res/movie-3.jpg">
+                            <p>环形使者</p>
+                        </li>
+                    </ul>
+                    <div class="spaceLine"></div>
                 </div>
-            </div>
-            <div data-role="content">
-                <div class="abordGateInfos nextPageWrap">
-                    <a href="#smsPage" id="J_iconTrans" class="nextPage" data-transition="slideup"><i class="icon icon_btnDown" style="font-size: 5rem;margin-top: 2rem;"></i></a>
+                <div data-role="content" style="marin-top: 2rem;">
+                    <div class="smsBox">
+                        <a href="javascript: void(0)" id="J_smsMe"><i class="icon icon_sms" style="font-size: 3rem;margin-top: -1rem;"></i> 短信通知我</a>
+                    </div>
+                </div>
+                <div data-role="content">
+                    <div class="abordGateInfos nextPageWrap">
+                        <a href="#smsPage" class="nextPage" data-transition="slideup"><i class="icon icon_btnDown" style="font-size: 5rem;margin-top: 2rem;"></i></a>
+                    </div>
                 </div>
             </div>
             <script type="script/template" id="enterPhoneNumber">
@@ -116,68 +118,70 @@
             </script>
         </div>
         <div data-role="page" id="smsPage" data-theme="e" class="gateInfo">
-            <div data-role="content">
-                <div class="gateHeader">
-                    <div class="gateNum">23</div>
-                    <div class="gateName">登机口</div>
-                    <div class="otherFlights">其余航班</div>
+            <div class="posAbsSmsPage">
+                <div data-role="content">
+                    <div class="gateHeader">
+                        <div class="gateNum">23</div>
+                        <div class="gateName">登机口</div>
+                        <div class="otherFlights">其余航班</div>
+                    </div>
+                    <ul class="flightsList" id="J_flightsInfo">
+                        <li>
+                            <p>
+                                <span class="flyIcon"><img src="../res/airlogos/air_logo_hn.png" /></span>
+                                <span class="flyFlag">MU3159</span>
+                            </p>
+                            <p><span class="placeTarget">目的地</span></p>
+                            <p class="placeName">成都</p>
+                            <p class="timeInfo onTime">准时</p>
+                        </li>
+                        <li>
+                            <p>
+                                <span class="flyIcon"><img src="../res/airlogos/air_logo_airsh.png" /></span>
+                                <span class="flyFlag">SH1580</span>
+                            </p>
+                            <p><span class="placeTarget">目的地</span></p>
+                            <p class="placeName">上海</p>
+                            <p class="timeInfo onLate">晚点 20分钟</p>
+                        </li>
+                        <li>
+                            <p>
+                                <span class="flyIcon"><img src="../res/airlogos/air_logo_airsouthofchina.png" /></span>
+                                <span class="flyFlag">NA9801</span>
+                            </p>
+                            <p><span class="placeTarget">目的地</span></p>
+                            <p class="placeName">哈尔滨</p>
+                            <p class="timeInfo onLate">晚点 30分钟</p>
+                        </li>
+                        <li>
+                            <p>
+                                <span class="flyIcon"><img src="../res/airlogos/air_logo_airsc.png" /></span>
+                                <span class="flyFlag">CN9561</span>
+                            </p>
+                            <p><span class="placeTarget">目的地</span></p>
+                            <p class="placeName">广州</p>
+                            <p class="timeInfo onTime">准时</p>
+                        </li>
+                        <li>
+                            <p>
+                                <span class="flyIcon"><img src="../res/airlogos/air_logo_airsz.png" /></span>
+                                <span class="flyFlag">NA9561</span>
+                            </p>
+                            <p><span class="placeTarget">目的地</span></p>
+                            <p class="placeName">呼和浩特</p>
+                            <p class="timeInfo onLate">晚点 20分钟</p>
+                        </li>
+                        <li>
+                            <p>
+                                <span class="flyIcon"><img src="../res/airlogos/air_logo_airsh.png" /></span>
+                                <span class="flyFlag">SH1580</span>
+                            </p>
+                            <p><span class="placeTarget">目的地</span></p>
+                            <p class="placeName">上海</p>
+                            <p class="timeInfo onTime">准时</p>
+                        </li>
+                    </ul>
                 </div>
-                <ul class="flightsList" id="J_flightsInfo">
-                    <li>
-                        <p>
-                            <span class="flyIcon"><img src="../res/airlogos/air_logo_hn.png" /></span>
-                            <span class="flyFlag">MU3159</span>
-                        </p>
-                        <p><span class="placeTarget">目的地</span></p>
-                        <p class="placeName">成都</p>
-                        <p class="timeInfo onTime">准时</p>
-                    </li>
-                    <li>
-                        <p>
-                            <span class="flyIcon"><img src="../res/airlogos/air_logo_airsh.png" /></span>
-                            <span class="flyFlag">SH1580</span>
-                        </p>
-                        <p><span class="placeTarget">目的地</span></p>
-                        <p class="placeName">上海</p>
-                        <p class="timeInfo onLate">晚点 20分钟</p>
-                    </li>
-                    <li>
-                        <p>
-                            <span class="flyIcon"><img src="../res/airlogos/air_logo_airsouthofchina.png" /></span>
-                            <span class="flyFlag">NA9801</span>
-                        </p>
-                        <p><span class="placeTarget">目的地</span></p>
-                        <p class="placeName">哈尔滨</p>
-                        <p class="timeInfo onLate">晚点 30分钟</p>
-                    </li>
-                    <li>
-                        <p>
-                            <span class="flyIcon"><img src="../res/airlogos/air_logo_airsc.png" /></span>
-                            <span class="flyFlag">CN9561</span>
-                        </p>
-                        <p><span class="placeTarget">目的地</span></p>
-                        <p class="placeName">广州</p>
-                        <p class="timeInfo onTime">准时</p>
-                    </li>
-                    <li>
-                        <p>
-                            <span class="flyIcon"><img src="../res/airlogos/air_logo_airsz.png" /></span>
-                            <span class="flyFlag">NA9561</span>
-                        </p>
-                        <p><span class="placeTarget">目的地</span></p>
-                        <p class="placeName">呼和浩特</p>
-                        <p class="timeInfo onLate">晚点 20分钟</p>
-                    </li>
-                    <li>
-                        <p>
-                            <span class="flyIcon"><img src="../res/airlogos/air_logo_airsh.png" /></span>
-                            <span class="flyFlag">SH1580</span>
-                        </p>
-                        <p><span class="placeTarget">目的地</span></p>
-                        <p class="placeName">上海</p>
-                        <p class="timeInfo onTime">准时</p>
-                    </li>
-                </ul>
             </div>
         </div>
      <body>
