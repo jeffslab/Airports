@@ -69,7 +69,7 @@ module.exports = function(grunt) {
         jshint: {
             main: {
                 files: {
-                    src: ['**/*.js', '!lib/iscroll.js', '!lib/zepto*.js', '!lib/jqmobile/**/*', '!lib/jquery*.js', '!lib/bootstrap/**/*.js', '!build/**/*.js', '!node_modules/**/*.js', '!bower_components/**/*.js']
+                    src: ['**/*.js', '!lib/iscroll.js', '!lib/swipe.js', '!lib/zepto*.js', '!lib/jqmobile/**/*', '!lib/jquery*.js', '!lib/bootstrap/**/*.js', '!build/**/*.js', '!node_modules/**/*.js', '!bower_components/**/*.js']
                 },
                 options: {
                     //jshintrc: '.jshintrc',

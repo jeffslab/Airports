@@ -139,7 +139,8 @@
         <div>
           <div style="text-align:left;vertical-align:middle;line-height:12rem;margin-left:4rem">              
                 <i class="icon icon_telephone" style="color:#fff;font-size:5rem;color:#999;"></i>
-                <a href="tel:010-68789876" style="font-size:5rem;font-family:Arial;color:#999;text-decoration:none;">&nbsp;&nbsp;010 - 68789876&nbsp;&nbsp;</a>                                                            
+                <a href="tel:010-68789876" style="font-size:5rem;font-family:Arial;color:#999;text-decoration:none;">&nbsp;&nbsp;010 - 68789876&nbsp;&nbsp;</a>                                            
+                <i class="icon icon_telephone" style="font-size:5rem;color:#999;margin-right:2rem"></i>
           </div>          
         </div>
         <hr />
@@ -239,7 +240,7 @@
             imgMap[item.class] = item;
         })
 
-        function swipeMenu(isRight) {            
+        function swipeMenu(isRight) {
             menuIndex = isRight ? menuIndex + 1 : menuIndex - 1;
             if (menuIndex > menuLength) menuIndex = 0;
             if (menuIndex < 0) menuIndex = menuLength;
@@ -247,9 +248,7 @@
             if (lis) {
                 lis.removeClass("curr");
                 $(lis[menuIndex]).addClass("curr");
-                $(".main section").siblings().hide();
-                var menuId = menuIndex == 0 ? 'all' : menuIndex;
-                $("#sec-menu-" + menuId).show();
+                $(".main section").siblings().hide().eq(menuIndex).show();
             }
         }
 
@@ -403,21 +402,21 @@
                 })
             })
 
-//            $('.main').on('touchstart', function (e) {
-//                mainStartx = e.changedTouches[0].pageX;
-//                mainStarty = e.changedTouches[0].pageY;
-//            });
-//            $('.main').on('touchend', function (e) {
-//                mainEndx = e.changedTouches[0].pageX;
-//                mainEndy = e.changedTouches[0].pageY;
+            $('.main').on('touchstart', function (e) {
+                mainStartx = e.changedTouches[0].pageX;
+                mainStarty = e.changedTouches[0].pageY;
+            });
+            $('.main').on('touchend', function (e) {
+                mainEndx = e.changedTouches[0].pageX;
+                mainEndy = e.changedTouches[0].pageY;
 
-//                var moveY = mainEndy - mainStarty;
-//                var moveX = mainEndx - mainStartx;
-//                var isRight = moveX < 0 ? true : false;                
-//                if (Math.abs(moveX) > 50 && Math.abs(moveY) < 50) {
-//                    swipeMenu(isRight);
-//                }
-//            });
+                var moveY = mainEndy - mainStarty;
+                var moveX = mainEndx - mainStartx;
+                var isRight = moveX < 0 ? true : false;                
+                if (Math.abs(moveX) > 50 && Math.abs(moveY) < 50) {
+                    swipeMenu(isRight);
+                }
+            });
 
             $('.detail').on('touchstart', function (e) {
                 startx = e.changedTouches[0].pageX;
