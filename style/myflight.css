@@ -1,7 +1,6 @@
 .bgOne {
-    position: relative;
-    background:url('../res/bg-flight.jpg') no-repeat 0 0 #1b52b2;
-    /*background-size: 100% 100%;*/
+    background:url('../res/bg-flight.jpg') no-repeat 0 0 #1b52b2 fixed;
+    /*-webkit-filter: blur(2px);*/
 }
 .posAbs {
     position: absolute;
@@ -17,7 +16,6 @@ div.fr {
 }
 .title {
     height: 10rem;
-    border-bottom: 1px solid #fff;
     width: 100%;
     position: relative;
     overflow: hidden;
@@ -54,7 +52,6 @@ div.fr {
 
 
 .flightInfo {
-    border-bottom: 1px solid #fff;
     width: 100%;
 }
 
@@ -115,7 +112,6 @@ div.fr {
     background: #3264ba;
 }
 .fourInfos {
-    border-bottom: 1px solid #fff;
     text-align: center;
     padding-bottom: 2rem;
     margin-top: 1rem;
@@ -184,8 +180,20 @@ div.fr {
     color: #fff;
 }
 .abordGateInfos {
+    position: relative;
     text-align: center;
     margin: 0 auto;
+}
+.nextPageWrap {
+    width: 100%;
+    height: 12rem;
+}
+.nextPage {
+	-webkit-animation: slideUp 2s infinite linear;
+    position: absolute;
+    left: 50%;
+    margin-left: -2.5rem;
+    top: 0;
 }
 .abordGateInfos a {
     text-decoration: none;
@@ -295,4 +303,20 @@ div.fr {
 .placeName {
     font-size: 5rem;
     margin-top: 1rem;
+}
+.spaceLine {
+    height: 1px;
+    overflow: hidden;
+    line-height: 0;
+    font-size: 0;
+    width: 86%;
+    margin: 0 auto;
+    clear: both;
+    background: #fff;
+    opacity: 0.5;
+}
+@-webkit-keyframes slideUp {
+    0% { top: 0; }
+    50% { top: 2rem; }
+    100% { top: 0; }
 }
