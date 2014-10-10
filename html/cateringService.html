@@ -349,18 +349,26 @@
                 startx = e.originalEvent.targetTouches[0].pageX;
                 starty = e.originalEvent.targetTouches[0].pageY;
                 startAtEnd = isPageEnd();
-                if (startAtEnd) {
+            })
+            $('#detail').on('touchmove', function (e) {
+                var cx = e.originalEvent.targetTouches[0].pageX;
+                var cy = e.originalEvent.targetTouches[0].pageY;
+                var direction = starty - cy > 0 ? 1 : 0;
+                if (direction == 1 && startAtEnd) {
                     e.preventDefault();
                 }
             })
             $('#detail').on('touchend', function (e) {
                 endx = e.originalEvent.changedTouches[0].pageX;
                 endy = e.originalEvent.changedTouches[0].pageY;
-                var direction = GetSlideDirection(startx, starty, endx, endy);
+                var direction = starty - endy > 0 ? 1 : 0;
                 var dy = Math.abs(starty - endy);
                 if (direction == 1 && dy >= 50 && startAtEnd) {
                     e.preventDefault();
                     pullup();
+                }
+                else {
+                    startAtEnd = false;
                 }
             })
         }
@@ -370,7 +378,6 @@
             var pageHeight = document.body.scrollHeight;
             var screenHeight = document.body.clientHeight;
             var scrollTop = document.body.scrollTop;
-            console.log(pageHeight, screenHeight, scrollTop);
             if (Math.abs(pageHeight - scrollTop - screenHeight) <= 5) {
                 return true;
             }
