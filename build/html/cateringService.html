@@ -4,10 +4,14 @@
     <title>CateringService</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1 user-scalable=0"/>    
-    <script src="../lib/zepto.js"></script>
-    <script src="../lib/swipe.js"></script>
+    <script src="../lib/jquery.js"></script>
+    <script src="../lib/jqmobile/jquery.mobile.custom.js"></script>    
+    <link rel="stylesheet" href="../lib/jqmobile/jquery.mobile.custom.structure.css"/>
+    <link rel="stylesheet" href="../lib/jqmobile/jquery.mobile.custom.theme.css" />    
     <link rel="stylesheet" href="../style/index.css"/>
-
+    <link rel="stylesheet" href="../style/myTran.css"/>
+    <script src="../lib/swipe.js"></script>
+    <script src="../lib/myTran.js"></script>
     <style>   
         *{ margin:0; padding: 0;}
         li{ list-style-type: none;}
@@ -18,36 +22,38 @@
             -webkit-user-select: none;             
         }    
         div.hide{display:none}
-        .main{ width: 100%; height: auto; position: relative;}
-        .main section{ width: 100%; height: auto; position:absolute; left: 0; top:0; }
+        .main{ width: 100%; height: auto; position: relative;z-index:1}
+        .main section{ width: 100%; height: auto;left: 0; top:0; }
         .main section div{ width: 100%;left: 0; top:0; }
         .main section.hide{ display: none;}
         .main section.curr{ display: block;} 
-    
-        .menu{ width: 100%; position: fixed; bottom:0;left:0; }
+        .clearfix:after {clear: both;content: "";display: block;visibility: hidden;}
+        .menu{ width: 100%; position: fixed; bottom:0;left:0;z-index:30;background:#fff }
         .menu.menucurr{ background: #fff;}
         .menu ul{width: 100%; height: 100%; }
-        .menu li{ width: 16.66%; height: 12rem; float: left;text-align: center; background: #fff; font-size:8rem;color:#999;}
+        .menu li{ width: 16.66%; float: left;text-align: center; background: #fff; font-size:8rem;color:#999;}
         .menu li.curr{color:#000}   
-        .menu ul i{line-height:3rem;font-size:8rem;}
-        .menu li p{line-height:2rem;font-size:2rem;text-align:center;}        
+        .menu ul i{line-height:2rem;font-size:8rem;}
+        .menu li p{line-height:2rem;font-size:2rem;text-align:center;margin:0 0 2px 0}        
         
-        .detail_menu{ width: 100%; height: 5rem; position: fixed; bottom:0; left:0; }
-        .detail_menu ul{width: 100%; height: 100%; }
-        .detail_menu li{ width: 33.3%; height: 100%; float: left; line-height: 6rem; text-align: center; background: #000; color:#fff;font-size:6rem;color:#fff}
-        
-        .detail{width: 100%; height: 100%; position:relative;top:0;left:0;}
+        .detail{width: 100%; height: 100%; position:relative;top:0;left:0;z-index:20;background-color:#fff}
         .detail div{background-color:#fff}
         .detail hr{width:100%;color:#ccc;size:1;}       
         .filter{filter:alpha(opacity=50);-moz-opacity:0.5;-khtml-opacity: 0.5;opacity: 0.5;}
         .bottom{width:100%;height: 5rem;}
         .loading{color:#000;position:absolute;width:100%;top:0;bottom:0;text-align:center;background-image:url('../res/ajax-loader.gif');background-color:rgba(0,0,0,0.8);background-position:center;background-repeat:no-repeat}
         .loading img{width:2.7rem;height:2.7rem;position:absolute;top:0;left:0;right:0;bottom:0}
-        .main_mask{position:absolute; width:100%;height:100%;filter:alpha(opacity=50);-moz-opacity:0.5;-khtml-opacity: 0.5;opacity: 0.5;color:#fff}
+        .main_mask{position:absolute;top:0;left:0; width:100%;height:100%;filter:alpha(opacity=50);-moz-opacity:0.5;-khtml-opacity: 0.5;opacity: 0.5;background-color:#000;z-index:10;}
         .muti_img{position:relative;}       
          
         #position{text-align: center;font-size: 10rem;line-height: 2rem;color: #fff;display: block;position: absolute;bottom: 2rem;left: 50%;margin-left: -50%;width: 100%;}
-        #position em.on{color:#FBFA4F}        
+        #position em.on{color:#FBFA4F}   
+        
+        .ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper
+        {
+            background-color:transparent
+        }    
+        .ui-mobile .ui-page {min-height: 100%;}
         
         /* Swipe 2 required styles */
 
@@ -66,16 +72,6 @@
           position: relative;
         }        
        /* END required styles */
-       .initTranslate{
-                transform:translate3d(0,100%,0);  
-                -webkit-transform:translate3d(0,100%,0);
-        }
-        .scrollTranslate{
-                transform:translate3d(0,0,0);  
-                -webkit-transform:translate3d(0,0,0); 
-         }         
-        
-        .easeup{-webkit-transition: 1000ms; -webkit-transform: translate(0px, -800px);}
     </style>
 
     <script>
@@ -95,96 +91,97 @@
         } ());
     </script>
 </head>
-<body>
-    <div class="main" id="main">                
-        <section class="curr" id="sec-menu-all">          
-        </section>
-        <section  class="hide" id="sec-menu-1">           
-        </section>
-        <section class="hide" id="sec-menu-2">            
-        </section>
-        <section class="hide" id="sec-menu-3">            
-        </section>
-        <section class="hide" id="sec-menu-4">            
-        </section>
-        <section class="hide" id="sec-menu-5">
-        </section>                
-    </div>
-    <div class="detail hide" id="detail">        
-        <div id='mySwipe' style='max-width:100%;' class='swipe'>
-          <div class='swipe-wrap'>
-            <div><img src="../res/menu-1/shop-1/picture-1.jpg" alt=""/></div>
-            <div><img src="../res/menu-1/shop-1/picture-2.jpg" alt=""/></div>
-            <div><img src="../res/menu-1/shop-1/picture-3.jpg" alt=""/></div>
-            <div><img src="../res/menu-1/shop-1/picture-4.jpg" alt=""/></div>            
-          </div>
-          <span id="position">
-            <em class="on">•</em>
-            <em>•</em>
-            <em>•</em>
-            <em>•</em>
-          </span>
-        </div>        
-        <div style="vertical-align:middle;line-height:7rem;">
-          <div style="margin: 2rem 0 0 4rem">
-            <span id="detail_name" style="font-size:6rem;font-family:@黑体;font-weight:bold;">太平洋咖啡</span>
-          </div>          
-          <img style="width:15rem;height:2.5rem;margin: 0 0 5rem 4rem" src="../res/score.png" alt=""/>          
+<body>    
+    <div id="page1">
+        <div class="main" id="main">                
+            <section class="curr" id="sec-menu-all">          
+            </section>
+            <section  class="hide" id="sec-menu-1">           
+            </section>
+            <section class="hide" id="sec-menu-2">            
+            </section>
+            <section class="hide" id="sec-menu-3">            
+            </section>
+            <section class="hide" id="sec-menu-4">            
+            </section>
+            <section class="hide" id="sec-menu-5">
+            </section>
+            <div class="main_mask hide"></div>            
         </div>
-        <hr />
-        <div style="vertical-align:middle;line-height:12rem">
-          <span style="font-size:3.6rem;font-family:@黑体;margin-left:4rem">距离50米 人均￥40  时间 5:00-23:00</span>
-        </div>
-        <hr />
-        <div>
-          <div style="text-align:left;vertical-align:middle;line-height:12rem;margin-left:4rem">              
-                <i class="icon icon_telephone" style="color:#fff;font-size:5rem;color:#999;"></i>
-                <a href="tel:010-68789876" style="font-size:5rem;font-family:Arial;color:#999;text-decoration:none;">&nbsp;&nbsp;010 - 68789876&nbsp;&nbsp;</a>                                            
-                <i class="icon icon_telephone" style="font-size:5rem;color:#999;margin-right:2rem"></i>
-          </div>          
-        </div>
-        <hr />
-        <img src="../res/map-1.jpg" alt="" style="max-width: 100%; display: block;"/>        
+        <div class="menu">
+            <ul class="clearfix">
+                <li index='0' class="curr">
+                    <i class="icon icon_menuNear"></i>
+                    <p>附近</p>
+                </li>
+                <li index='1'>
+                    <i class="icon icon_dutyFree"></i>
+                    <p>免税店</p>
+                </li>
+                <li index='2'>
+                    <i class="icon icon_menuFood"></i>
+                    <p>快餐</p>
+                </li>
+                <li index='3'>
+                    <i class="icon icon_menuCoffee"></i>
+                    <p>咖啡</p>
+                </li>
+                <li index='4'>
+                    <i class="icon icon_menuRestaurant"></i>
+                    <p>正餐</p>
+                </li>
+                <li index='5'>
+                    <i class="icon icon_menuShop"></i>
+                    <p>购物</p>
+                </li>
+            </ul>
+        </div>    
     </div>
 
-    <div class="menu">
-        <ul>
-            <li index='0' class="curr">
-              <i class="icon icon_menuNear"></i>
-              <p>附近</p>
-            </li>
-            <li index='1'>
-              <i class="icon icon_dutyFree"></i>
-              <p>免税店</p>
-            </li>
-            <li index='2'>
-              <i class="icon icon_menuFood"></i>
-              <p>快餐</p>
-            </li>
-            <li index='3'>
-              <i class="icon icon_menuCoffee"></i>
-              <p>咖啡</p>
-            </li>
-            <li index='4'>
-              <i class="icon icon_menuRestaurant"></i>
-              <p>正餐</p>
-            </li>
-            <li index='5'>
-              <i class="icon icon_menuShop"></i>
-              <p>购物</p>
-            </li>
-        </ul>
-    </div>
-    <div class="detail_menu hide">
-        <ul>
-            <li class="icon icon_btnDown "></li>
-            <li class="icon icon_btnDown "></li>
-            <li class="icon icon_btnDown "></li>            
-        </ul>
+    <div id="page2">
+        <div class="detail hide" id="detail">        
+            <div id='mySwipe' style='max-width:100%;' class='swipe'>
+                <div class='swipe-wrap'>
+                <div><img src="../res/menu-1/shop-1/picture-1.jpg" alt=""/></div>
+                <div><img src="../res/menu-1/shop-1/picture-2.jpg" alt=""/></div>
+                <div><img src="../res/menu-1/shop-1/picture-3.jpg" alt=""/></div>
+                <div><img src="../res/menu-1/shop-1/picture-4.jpg" alt=""/></div>            
+                </div>
+                <span id="position">
+                <em class="on">•</em>
+                <em>•</em>
+                <em>•</em>
+                <em>•</em>
+                </span>
+            </div>        
+            <div style="vertical-align:middle;line-height:7rem;">
+                <div style="margin: 2rem 0 0 4rem;">
+                <span id="detail_name" style="font-size:6rem;font-family:@黑体;font-weight:bold;">太平洋咖啡</span>
+                </div>          
+                <img style="width:15rem;height:2.5rem;margin: 0 0 5rem 4rem" src="../res/score.png" alt=""/>          
+            </div>
+            <hr />
+            <div style="vertical-align:middle;line-height:12rem">
+                <span style="font-size:3.6rem;font-family:@黑体;margin-left:4rem">距离50米 人均￥40  时间 5:00-23:00</span>
+            </div>
+            <hr />
+            <div>
+                <div style="text-align:left;vertical-align:middle;line-height:12rem;margin-left:4rem">              
+                    <i class="icon icon_telephone" style="color:#fff;font-size:5rem;color:#999;"></i>
+                    <a href="tel:010-68789876" style="font-size:5rem;font-family:Arial;color:#999;text-decoration:none;">&nbsp;&nbsp;010 - 68789876&nbsp;&nbsp;</a>                                            
+                    <i class="icon icon_telephone" style="font-size:5rem;color:#999;margin-right:2rem"></i>
+                </div>          
+            </div>
+            <hr />
+            <img src="../res/map-1.jpg" alt="" style="max-width: 100%; display: block;"/>        
+        </div>
     </div>
 </body>
 <script>
-
+    //阻止横屏
+    $(window).on('orientationchange', function (e) {
+        e.preventDefault();
+    });
     $(document).ready(function () {
         var isLoading = false;
         var imgMap = {};
@@ -268,16 +265,31 @@
             }, 1000)
         }
 
+        function pullup() { //上滑动作
+            myTran.goTo('myslide', '', '#page1', '#page2');
+            setTimeout(function () {
+                showMain();
+            }, 350)
+        }
+
+        function showMain() {
+            myTran.restore('myslide', '#page2');
+            $('.main').removeClass('hide');
+            $('.menu').removeClass('hide');
+            window.scrollTo(0, mainScrollTop);
+            $('.detail').addClass('hide');
+        }
+
         function showDetail() {
             $('.main').addClass('hide');
             $('.menu').addClass('hide');
             window.scrollTo(0, 0);
-            $('.detail').removeClass('hide').removeClass('easeup');
+            $('.detail').removeClass('hide');
 
             var elem = document.getElementById('mySwipe');
             window.mySwipe = Swipe(elem, {
                 startSlide: 0,
-                auto: 300000,
+                auto: 3000,
                 continuous: true,
                 disableScroll: true,
                 stopPropagation: true,
@@ -310,14 +322,6 @@
             }
         }
 
-        function showMain() {
-            $('.main').removeClass('hide');
-            $('.menu').removeClass('hide');
-            window.scrollTo(0, mainScrollTop);
-            $('.detail').addClass('hide');
-            $('.detail').removeClass('easeup');
-        }
-
         function initDom() {
             var sectionAll = $('#sec-menu-all');
             $(imgData).each(function (index) {
@@ -328,31 +332,61 @@
                         var imgPath = item.path + item.sub + (i + 1) + '/' + item.pic_pre + '0.jpg';
                         var imgId = 'img_' + item.class + '_' + i;
                         var img = '<div class="muti_img"><img src="' + imgPath + '" alt="" id="' + imgId + '"></div>';
-
-                        $(img).live('tap', function (e) {
-                            var targetId = e.target.id;
-                            if (targetId && !isLoading) {
-                                loadTarget(targetId)
-                            }
-                        })
                         if (sectionAll.children().length < 12) {
                             sectionAll.append(img);
                         }
                         par.append(img);
                     }
                 }
+            });
+            $('#main').on('tap', 'img', function (e) {
+                var targetId = this.id;
+                if (targetId && !isLoading) {
+                    loadTarget(targetId)
+                }
             })
+            $('#detail').on('touchstart', function (e) {
+                startx = e.originalEvent.targetTouches[0].pageX;
+                starty = e.originalEvent.targetTouches[0].pageY;
+                startAtEnd = isPageEnd();
+            })
+            $('#detail').on('touchmove', function (e) {
+                var cx = e.originalEvent.targetTouches[0].pageX;
+                var cy = e.originalEvent.targetTouches[0].pageY;
+                var direction = starty - cy > 0 ? 1 : 0;
+                if (direction == 1 && startAtEnd) {
+                    e.preventDefault();
+                }
+            })
+            $('#detail').on('touchend', function (e) {
+                endx = e.originalEvent.changedTouches[0].pageX;
+                endy = e.originalEvent.changedTouches[0].pageY;
+                var direction = starty - endy > 0 ? 1 : 0;
+                var dy = Math.abs(starty - endy);
+                if (direction == 1 && dy >= 50 && startAtEnd) {
+                    e.preventDefault();
+                    pullup();
+                }
+                else {
+                    startAtEnd = false;
+                }
+            })
+        }
+
+        //判断屏幕是否在底部
+        function isPageEnd() {
+            var pageHeight = document.body.scrollHeight;
+            var screenHeight = document.body.clientHeight;
+            var scrollTop = document.body.scrollTop;
+            if (Math.abs(pageHeight - scrollTop - screenHeight) <= 5) {
+                return true;
+            }
+            return false
         }
 
         //返回角度
         function GetSlideAngle(dx, dy) {
             return Math.atan2(dy, dx) * 180 / Math.PI;
-        }
-        function pullup() { //上滑动作
-            $('.detail').addClass('easeup');
-            setTimeout(function () {
-                showMain();
-            }, 300)
         }
         //根据起点和终点返回方向 1：向上，2：向下，3：向左，4：向右,0：未滑动
         function GetSlideDirection(startX, startY, endX, endY) {
@@ -379,63 +413,17 @@
 
             return result;
         }
-        //判断屏幕是否在底部
-        function isPageEnd() {
-            var pageHeight = document.body.scrollHeight;
-            var screenHeight = document.body.clientHeight;
-            var scrollTop = document.body.scrollTop;
-
-            if (pageHeight - scrollTop == screenHeight) {
-                return true;
-            }
-            return false
-        }
 
         var startx, starty, movex, movey, endx, endy, startAtEnd = false, mainStartx, mainStarty, mainEndx, mainEndy;
         function menuEvent() {
             $(".menu li").each(function (index) {
-                $(this).tap(function (e) {
+                $(this).on('tap', function (e) {
                     menuIndex = parseInt($(e.target).parent('li').attr('index'));
                     $(this).addClass("curr").siblings().removeClass("curr");
                     $(".main section").eq(index).show().siblings().hide();
                     window.scrollTo(0, 0);
                 })
             })
-
-            $('.main').on('touchstart', function (e) {
-                mainStartx = e.changedTouches[0].pageX;
-                mainStarty = e.changedTouches[0].pageY;
-            });
-            $('.main').on('touchend', function (e) {
-                mainEndx = e.changedTouches[0].pageX;
-                mainEndy = e.changedTouches[0].pageY;
-
-                var moveY = mainEndy - mainStarty;
-                var moveX = mainEndx - mainStartx;
-                var isRight = moveX < 0 ? true : false;                
-                if (Math.abs(moveX) > 50 && Math.abs(moveY) < 50) {
-                    swipeMenu(isRight);
-                }
-            });
-
-            $('.detail').on('touchstart', function (e) {
-                startx = e.changedTouches[0].pageX;
-                starty = e.changedTouches[0].pageY;
-
-            });
-            $('.detail').on('touchmove', function (e) {
-
-            });
-            $('.detail').on('touchend', function (e) {
-                endx = e.changedTouches[0].pageX;
-                endy = e.changedTouches[0].pageY;
-                var direction = GetSlideDirection(startx, starty, endx, endy);
-                //var startAtEnd = isPageEnd();
-                var dy = Math.abs(starty - endy);
-                if (direction == 1 && dy > 50) {
-                    pullup();
-                }
-            });
         }
 
         initDom();
