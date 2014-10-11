@@ -271,6 +271,7 @@
             $('.main').addClass('po_absolute');
             $('.main').removeClass('hide');
             $('.main_mask').removeClass('hide');
+            $('.menu').removeClass('hide');
             myTran.goTo('myslide', '', '#page1', '#page2');
             setTimeout(function () {
                 showMain();
@@ -279,12 +280,9 @@
 
         function showMain() {
             myTran.restore('myslide', '#page2');
-            $('.main').removeClass('hide');
             $('.main').removeClass('po_absolute');
             $('.main').addClass('po_relative');
-            $('.menu').removeClass('hide');
             $('.main_mask').addClass('hide');
-            //window.scrollTo(0, mainScrollTop);
             $('.detail').addClass('hide');
         }
 
@@ -353,6 +351,33 @@
                     loadTarget(targetId)
                 }
             })
+
+            $('#main').on('touchstart', function (e) {
+                mStartx = e.originalEvent.targetTouches[0].pageX;
+                mStarty = e.originalEvent.targetTouches[0].pageY;
+                mStartAtEnd = isPageEnd();
+            })
+            $('#main').on('touchmove', function (e) {
+                var cx = e.originalEvent.targetTouches[0].pageX;
+                var cy = e.originalEvent.targetTouches[0].pageY;
+                var direction = mStarty - cy > 0 ? 1 : 0;
+                if (direction == 1 && mStartAtEnd) {
+                    e.preventDefault();
+                }
+            })
+            $('#main').on('touchend', function (e) {
+                mEndx = e.originalEvent.changedTouches[0].pageX;
+                mEndy = e.originalEvent.changedTouches[0].pageY;
+                var direction = mStarty - mEndy > 0 ? 1 : 0;
+                var dy = Math.abs(mStarty - mEndy);
+                if (direction == 1 && dy >= 50 && mStartAtEnd) {
+                    e.preventDefault();
+                }
+                else {
+                    startAtEnd = false;
+                }
+            })
+
             $('#detail').on('touchstart', function (e) {
                 startx = e.originalEvent.targetTouches[0].pageX;
                 starty = e.originalEvent.targetTouches[0].pageY;
@@ -422,7 +447,7 @@
             return result;
         }
 
-        var startx, starty, movex, movey, endx, endy, startAtEnd = false, mainStartx, mainStarty, mainEndx, mainEndy;
+        var startx, starty, endx, endy, startAtEnd = false, mStartx, mStarty, mEndx, mEndy, mStartAtEnd = false;
         function menuEvent() {
             $(".menu li").each(function (index) {
                 $(this).on('tap', function (e) {
