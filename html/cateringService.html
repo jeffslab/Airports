@@ -35,7 +35,7 @@
         .menu ul{width: 100%; height: 100%; }
         .menu li{ width: 16.66%; float: left;text-align: center; background: #fff; font-size:8rem;color:#999;}
         .menu li.curr{color:#000}   
-        .menu ul i{line-height:2rem;font-size:8rem;}
+        .menu ul i{line-height:2rem;font-size:6rem;}
         .menu li p{line-height:2rem;font-size:2rem;text-align:center;margin:0 0 2px 0}        
         
         .detail{width: 100%; height: 100%; position:relative;top:0;left:0;z-index:20;background-color:#fff}
@@ -108,7 +108,8 @@
             </section>
             <section class="hide" id="sec-menu-5">
             </section>
-            <div class="main_mask hide"></div>            
+            <div style="background-color:transparent;height:6rem"></div>
+            <div class="main_mask"></div>            
         </div>
         <div class="menu">
             <ul class="clearfix">
@@ -144,10 +145,10 @@
         <div class="detail hide" id="detail">        
             <div id='mySwipe' style='max-width:100%;' class='swipe'>
                 <div class='swipe-wrap'>
-                <div><img src="../res/menu-1/shop-1/picture-1.jpg" alt=""/></div>
-                <div><img src="../res/menu-1/shop-1/picture-2.jpg" alt=""/></div>
-                <div><img src="../res/menu-1/shop-1/picture-3.jpg" alt=""/></div>
-                <div><img src="../res/menu-1/shop-1/picture-4.jpg" alt=""/></div>            
+                    <div><img src="../res/menu-1/shop-1/picture-1.jpg" alt=""/></div>
+                    <div><img src="../res/menu-1/shop-1/picture-2.jpg" alt=""/></div>
+                    <div><img src="../res/menu-1/shop-1/picture-3.jpg" alt=""/></div>
+                    <div><img src="../res/menu-1/shop-1/picture-4.jpg" alt=""/></div>            
                 </div>
                 <span id="position">
                 <em class="on">•</em>
@@ -191,6 +192,7 @@
         var menuLength = 5;
         var bullets = document.getElementById('position').getElementsByTagName('em');
         var mainScrollTop = 0;
+        var mainImgNum = 0;
         var imgData = [{
             class: 'sec-menu-1',
             path: '../res/menu-1/',
@@ -259,10 +261,12 @@
                 var loading = '<div class="loading"></div>';
                 parentDIv.append(loading);
             }
+            $('.main_mask').removeClass('hide');
             loadDetail(id);
             setTimeout(function () {
                 isLoading = false;
                 parentDIv.children('.loading').remove();
+                $('.main_mask').addClass('hide');
                 showDetail(id);
             }, 1000)
         }
@@ -343,6 +347,7 @@
                         }
                         par.append(img);
                     }
+                    mainImgNum += item.len;
                 }
             });
             $('#main').on('tap', 'img', function (e) {
@@ -351,7 +356,13 @@
                     loadTarget(targetId)
                 }
             })
-
+            var imgCount = 0;
+            $('#main img').load(function (e) {
+                imgCount++;
+                if (imgCount == mainImgNum) {
+                    $('.main_mask').addClass('hide');
+                }
+            })
             $('#main').on('touchstart', function (e) {
                 mStartx = e.originalEvent.targetTouches[0].pageX;
                 mStarty = e.originalEvent.targetTouches[0].pageY;
@@ -369,15 +380,13 @@
                 mEndx = e.originalEvent.changedTouches[0].pageX;
                 mEndy = e.originalEvent.changedTouches[0].pageY;
                 var direction = mStarty - mEndy > 0 ? 1 : 0;
-                var dy = Math.abs(mStarty - mEndy);
-                if (direction == 1 && dy >= 50 && mStartAtEnd) {
+                if (direction == 1 && mStartAtEnd) {
                     e.preventDefault();
                 }
                 else {
                     startAtEnd = false;
                 }
             })
-
             $('#detail').on('touchstart', function (e) {
                 startx = e.originalEvent.targetTouches[0].pageX;
                 starty = e.originalEvent.targetTouches[0].pageY;
@@ -453,7 +462,7 @@
                 $(this).on('tap', function (e) {
                     menuIndex = parseInt($(e.target).parent('li').attr('index'));
                     $(this).addClass("curr").siblings().removeClass("curr");
-                    $(".main section").eq(index).show().siblings().hide();
+                    $(".main section").eq(index).show().siblings('section').hide();
                     window.scrollTo(0, 0);
                 })
             })
