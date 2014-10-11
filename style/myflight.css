@@ -5,7 +5,8 @@
 }
 .posBgFirstPage, .posBgSecondPage {
     position: fixed;
-    height: 100%;
+    height: 100rem;
+    background: #fff;
     width: 100%;
     top: 0;
     left: 0;
@@ -373,4 +374,30 @@ div.fr {
     background: red;
     background-size: 100% 100%;
     opacity: .5;
+}
+/* css3 animations */
+@-webkit-keyframes topNagetiveSlide {
+    0% { top: -9999px; }
+    50% { top: -300px; }
+    100% { top: 0; }
+}
+.topNagetiveSlide {
+    -webkit-animation: topNagetiveSlide .5s linear;
+}
+.topSlide {
+    -webkit-animation: topSlide .5s linear;
+}
+.topEnd {
+    top: 0;
+}
+@-webkit-keyframes topSlide {
+    0% { top: 9999px; }
+    50% { top: 300px; }
+    100% { top: 0; }
+}
+.topSlide {
+    -webkit-animation: topSlide .5s linear;
+}
+.topEnd {
+    top: 0;
 }
