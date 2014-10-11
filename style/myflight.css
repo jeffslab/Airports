@@ -1,14 +1,56 @@
+.wrap {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+.posBgFirstPage, .posBgSecondPage {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+@-webkit-keyframes blurChange {
+    0% { -webkit-filter: blur(1px); }
+    50% { -webkit-filter: blur(3px); }
+    100% { -webkit-filter: blur(5px); }
+}
+.posBgFirstAnimateEnd {
+    -webkit-filter: blur(5px);
+}
+.posBgFirstAnimate {
+	-webkit-animation: blurChange .5s linear;
+}
+.posBgFirstPage {
+    background: #1b52b2 url('../res/bg-flight.jpg') no-repeat 0 0;
+    background-size: 100% 100%;
+    z-index: 3;
+}
+.posBgSecondPage {
+    background:url('../res/bg-flight-2.jpg') no-repeat 0 0;
+    background-size: 100% 100%;
+    z-index: 1;
+}
 .posAbsBg, .posAbsSmsPage {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 2;
+    width: 100%;
 }
 .posAbsBg {
-    background:url('../res/bg-flight.jpg') no-repeat 0 0 fixed;
+    /*
+    overflow-y: scroll;
+    background: url('../res/bg-flight.jpg') no-repeat 0 0 fixed;
+    background-size: 100% 100%;
+    */
+    z-index: 4;
 }
 .posAbsSmsPage {
+    /*
     background:url('../res/bg-flight-2.jpg') no-repeat 0 0 fixed;
+    background-size: 100% 100%;
+    */
+    z-index: 2;
 }
 div.fr {
     float: right;
@@ -17,6 +59,7 @@ div.fr {
     height: 10rem;
     width: 100%;
     position: relative;
+    color: #fff;
     overflow: hidden;
 }
 .font-ontime, .font-airchina {
@@ -78,6 +121,7 @@ div.fr {
     opacity: .5;
 }
 .boxs .posIcon {
+    color:#fff;
     position: absolute;
     right: 12rem;
     top: 0;
@@ -94,6 +138,7 @@ div.fr {
     font-size: 3.5rem;
 }
 .abordTimeBig, .targetName {
+    color:#fff;
     text-align: center;
     margin: 0 auto;
     font-size: 11rem;
@@ -111,6 +156,7 @@ div.fr {
     background: #3264ba;
 }
 .fourInfos {
+    color:#fff;
     text-align: center;
     padding-bottom: 2.5rem;
     margin-top: 2rem;
@@ -207,6 +253,9 @@ div.fr {
     height: 100%;
     line-height: 100%;
 }
+.phoneNumber {
+    color:#fff;
+}
 .phoneNumber input {
     float: left;
     width: 70%;
@@ -218,11 +267,6 @@ div.fr {
     border-left: 3px solid #fff;
 }
 
-
-
-.gateInfo {
-    background: url('../res/bg-flight-2.jpg') no-repeat 0 0 #1b52b2;
-}
 .gateHeader {
     padding-top: 2rem;
     position: relative;
@@ -309,7 +353,7 @@ div.fr {
     line-height: 0;
     font-size: 0;
     width: 86%;
-    margin: 0 auto;
+    margin: 0 auto 3rem;
     clear: both;
     background: #fff;
     opacity: 0.5;
@@ -318,4 +362,14 @@ div.fr {
     0% { top: 0; }
     50% { top: 2rem; }
     100% { top: 0; }
+}
+.alphaBg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1000px;
+    height: 1000px;
+    background: red;
+    background-size: 100% 100%;
+    opacity: .5;
 }
