@@ -11,20 +11,20 @@
         <link rel="stylesheet" href="../lib/jqmobile/jquery.mobile.custom.structure.css"/>
         <link rel="stylesheet" href="../lib/jqmobile/jquery.mobile.custom.theme.css"/>
         <script>
-            (function () {
-                var adjust = function () {
-                    var width, dom = document.getElementsByTagName("html")[0];
-                    return function () {
-                        var w = Math.min(dom.offsetWidth, 480);
-                        if (width != w) {
+            (function(){
+                var adjust=function(){
+                    var width,dom=document.getElementsByTagName("html")[0];
+                    return function(){
+                        var w=Math.min(dom.offsetWidth,480);
+                        if(width!=w){
                             width = w;
-                            dom.style.fontSize = (20 / 720 * width) + "px";
+                            dom.style.fontSize=(20/720*width)+"px";    
                         }
                     };
-                } ();
+                }();
                 adjust();
-                window.addEventListener("resize", function () { setTimeout(adjust, 200); }, false);
-            } ());
+                window.addEventListener("resize",function(){setTimeout(adjust,200);},false);
+            }());
         </script>
         <style>
             body{
@@ -114,7 +114,13 @@
                 font-size:3rem; 
                 color:#fff;
                 text-align:center;
-                margin-top:10rem;
+                margin-top:5rem;
+                position:relative;
+            }
+            .wrapper .icon_btnDown{
+                position:absolute; 
+                -webkit-animation: slideUp 1s infinite linear;
+                left:45%;
             }
             .wrapper .detail .list{
                 float:left;
@@ -200,6 +206,30 @@
                 transform:translate3d(0,0,0);  
                 -webkit-transform:translate3d(0,0,0); 
             }
+            .scale{
+                transform:scale(1.2);
+                -webkit-transform:scale(1.2);
+            }
+
+            @-webkit-keyframes blurChange {
+                0% { -webkit-filter: blur(1px); }
+                50% { -webkit-filter: blur(3px); }
+                100% { -webkit-filter: blur(5px); }
+            }
+            @-webkit-keyframes slideUp {
+                0% {
+                    top: 0
+                }
+
+                50% {
+                    top: 2rem
+                }
+
+                100% {
+                    top: 0
+                }
+            }
+            
         </style>
     </head>
     <body>
@@ -237,7 +267,7 @@
                          <i class="icon icon_call"></i>呼叫电瓶车 
                      </a>
                  </div>
-                 <div class="btn-down" style="margin-top:10rem;"><i class="icon icon_btnDown"></i></div>
+                 <div class="btn-down" style="margin-top:3rem;"><i class="icon icon_btnDown"></i></div>
              </div>
         </div>
         <div id="page3" data-role="page" class="bg-3">
@@ -264,7 +294,6 @@
                               </ul>
                       </div>
                  </div>
-                 <div class="btn-down" style="margin-top:10rem;"><i class="icon icon_btnDown"></i></div>
              </div>
         </div>
         <div class="lost-list">
@@ -305,8 +334,8 @@
                  </table>
              </div>
         <script>
-            (function ($, document) {
-                var startx, starty, endx, endy, listshow = 0;
+            (function($,document){
+                var startx,starty,endx,endy,listshow=0;
                 //$('.btn-down').css('top',($(window).height()/2+130)+'px');
                 //返回角度
                 function GetSlideAngle(dx, dy) {
@@ -327,9 +356,9 @@
                     var angle = GetSlideAngle(dx, dy);
                     if (angle >= -45 && angle < 45) {
                         result = 4;
-                    } else if (angle >= 45 && angle < 135) {
+                        } else if (angle >= 45 && angle < 135) {
                         result = 1;
-                    } else if (angle >= -135 && angle < -45) {
+                        } else if (angle >= -135 && angle < -45) {
                         result = 2;
                     }
                     else if ((angle >= 135 && angle <= 180) || (angle >= -180 && angle < -135)) {
@@ -338,192 +367,198 @@
 
                     return result;
                 }
-                function pulldown(targetpage, nextpage) {//下滑动作
-                    $('#' + targetpage).removeClass('scrollTranslate');
-                    setTimeout(function () {
-                        $('#' + targetpage).css('display', 'none');
-                    }, 300);
-                    $('#' + targetpage).removeClass('ui-page').removeClass('ui-page-theme-a').removeClass('ui-page-active');
-                    $('#' + nextpage).css('opacity', 1)
-                    $('#' + nextpage).css('display', 'block');
+                function pulldown(targetpage,nextpage){//下滑动作
+                          $('#'+targetpage).removeClass('scrollTranslate');   
+                          setTimeout(function(){
+                              $('#'+targetpage).css('display','none'); 
+                          },300);
+                          $('#'+nextpage).removeClass('scale');
+                          $('#'+targetpage).removeClass('ui-page').removeClass('ui-page-theme-a').removeClass('ui-page-active');
+                          $('#'+nextpage).css('-webkit-animation','');       
+                          $('#'+nextpage).css('display','block');
                 }
-                function pullup(targetpage, nextpage) { //上滑动作
-                    $('#' + nextpage).addClass('initTranslate').css('display', 'block');
-                    $('#' + targetpage).css({ 'opacity': 0.75 });
+                function pullup(targetpage,nextpage){ //上滑动作
+                          $('#'+nextpage).addClass('initTranslate').css('display','block');
+                          $('#'+targetpage).css({
+                              //'opacity':0.75,
+                              //'-webkit-filter':'blur(4px)'
+                              '-webkit-animation':'blurChange .5s linear'
+                          }).addClass('scale'); 
 
-                    setTimeout(function () {
-                        $('#' + nextpage).addClass('scrollTranslate');
-                        $('#' + nextpage).addClass('ui-page').addClass('ui-page-theme-a').addClass('ui-page-active');
-                    }, 300);
+                            setTimeout(function(){
+                                $('#'+nextpage).addClass('scrollTranslate');      
+                                $('#'+nextpage).addClass('ui-page').addClass('ui-page-theme-a').addClass('ui-page-active');
+                            },300);
                 }
                 $(document).on('pageinit', '#page1', function () {
-                    //$(this).on('swipeleft', function (e) {
-                    //    $.mobile.changePage('#page2', {
-                    //        transition: 'slide'
-                    //    });
-                    //});
-                    //$(this).find('.btn-down').on('click',function(){
-                    //    $.mobile.changePage('#page2',{
-                    //        transition:'slideup'
-                    //    });
-                    //});
-                    //$('#page2').find('.btn-down').on('click',function(){
-                    //        $.mobile.changePage('#page3',{
-                    //        transition:'slideup'
-                    //    }); 
-                    //});
-                    $('#page3').find('#lostlistshow').on('click', function () {
-                        $('#page3 .wrapper').fadeOut(function () {
-                            $('#page3').css('-webkit-filter', 'blur(3px)');
-                            $('.lost-list').fadeIn();
-                            listshow = 1;
-                        });
+                //$(this).on('swipeleft', function (e) {
+                //    $.mobile.changePage('#page2', {
+                //        transition: 'slide'
+                //    });
+                //});
+                //$(this).find('.btn-down').on('click',function(){
+                //    $.mobile.changePage('#page2',{
+                //        transition:'slideup'
+                //    });
+                //});
+                //$('#page2').find('.btn-down').on('click',function(){
+                //        $.mobile.changePage('#page3',{
+                //        transition:'slideup'
+                //    }); 
+                //});
+                $('#page3').find('#lostlistshow').on('click',function(){
+                    $('#page3 .wrapper').fadeOut(function(){
+                        $('#page3').css('-webkit-animation','blurChange .5s linear');
+                        $('.lost-list').fadeIn(); 
+                        listshow = 1;
                     });
-                    $('.close-list').on('click', function () {
-                        $('.lost-list').fadeOut(function () {
-                            $('#page3').css('-webkit-filter', 'none');
-                            $('#page3 .wrapper').fadeIn();
-                            listshow = 0;
-                        });
-                    });
-                    $('#page1 .btn-down').on('click', function () {
-                        $('#page2').addClass('initTranslate').css('display', 'block');
-                        $('#page1').css('opacity', 0.75);
-                        //$('#page1').css('-webkit-transform','scale(0.95,0.95)')
-                        setTimeout(function () {
-                            $('#page2').addClass('scrollTranslate');
-                            $('#page2').addClass('ui-page').addClass('ui-page-theme-a').addClass('ui-page-active');
-                        }, 300)
-                        setTimeout(function () {
-                            $('#page1').css('display', 'none');
-                        }, 800)
-                    });
-                    $('#page2 .btn-down').on('click', function () {
-                        $('#page3').addClass('initTranslate').css('display', 'block');
-                        $('#page2').css('opacity', 0.75);
-                        setTimeout(function () {
-                            $('#page3').addClass('scrollTranslate');
-                            $('#page3').addClass('ui-page').addClass('ui-page-theme-a').addClass('ui-page-active');
-                        }, 300)
-                    });
-                    $('#page1').on('touchstart', function (e) {
-                        startx = e.originalEvent.targetTouches[0].pageX;
-                        starty = e.originalEvent.targetTouches[0].pageY;
-                    });
-                    $('#page1').on('touchmove', function (e) {
-                        e.preventDefault();
-                        //movex = e.originalEvent.changedTouches[0].pageX;
-                        //movey = e.originalEvent.changedTouches[0].pageY;
-                        //var direction = GetSlideDirection(startx, starty, movex, movey);
-                        //var dy = Math.abs(starty - movey);
-                        //switch(direction){
-                        //    case 1:
-                        //    $('#page2').addClass('initTranslate').css('display','block');
-                        //    $('#page2')[0].style['transform'] = 'translate3d(0,'+($(window).height()-movey)+'px,0)'; 
-                        //    setTimeout(function(){
-                        //        
-                        //    },200);
-                        //     break;
-                        //}
-                    });
-                    $('#page1').on('touchend', function (e) {
-                        endx = e.originalEvent.changedTouches[0].pageX;
-                        endy = e.originalEvent.changedTouches[0].pageY;
-                        var direction = GetSlideDirection(startx, starty, endx, endy);
-                        var dy = Math.abs(starty - endy);
-                        switch (direction) {
-                            case 1:
-                                if (dy > 50) {
-                                    pullup('page1', 'page2');
-                                    setTimeout(function () {
-                                        $('#page1').css('display', 'none');
-                                    }, 800);
-                                }
-                                break;
+                });
+                $('.close-list').on('click',function(){
+                    $('.lost-list').fadeOut(function(){
+                        $('#page3').css('-webkit-animation',''); 
+                        $('#page3 .wrapper').fadeIn();
+                        listshow = 0;
+                    }); 
+                });
+                $('#page1 .btn-down').on('click',function(){
+                    $('#page2').addClass('initTranslate').css('display','block');
+                    $('#page1').css('-webkit-animation','blurChange .5s linear').addClass('scale'); 
+                    //$('#page1').css('-webkit-transform','scale(0.95,0.95)')
+                    setTimeout(function(){
+                        $('#page2').addClass('scrollTranslate'); 
+                        $('#page2').addClass('ui-page').addClass('ui-page-theme-a').addClass('ui-page-active');
+                    },300)
+                    setTimeout(function(){
+                        $('#page1').css('display','none');
+                    },800)
+                }); 
+                $('#page2 .btn-down').on('click',function(){
+                    $('#page3').addClass('initTranslate').css('display','block');
+                    $('#page2').css('-webkit-animation','blurChange .5s linear').addClass('scale'); 
+                    setTimeout(function(){
+                        $('#page3').addClass('scrollTranslate'); 
+                        $('#page3').addClass('ui-page').addClass('ui-page-theme-a').addClass('ui-page-active');
+                    },300)
+                }); 
+                $('#page1').on('touchstart',function(e){
+                    startx = e.originalEvent.targetTouches[0].pageX;
+                    starty = e.originalEvent.targetTouches[0].pageY;
+                });
+                $('#page1').on('touchmove',function(e){
+                    e.preventDefault();
+                    //movex = e.originalEvent.changedTouches[0].pageX;
+                    //movey = e.originalEvent.changedTouches[0].pageY;
+                    //var direction = GetSlideDirection(startx, starty, movex, movey);
+                    //var dy = Math.abs(starty - movey);
+                    //switch(direction){
+                    //    case 1:
+                    //    $('#page2').addClass('initTranslate').css('display','block');
+                    //    $('#page2')[0].style['transform'] = 'translate3d(0,'+($(window).height()-movey)+'px,0)'; 
+                    //    setTimeout(function(){
+                    //        
+                    //    },200);
+                    //     break;
+                    //}
+                });
+                $('#page1').on('touchend',function(e){
+                   endx = e.originalEvent.changedTouches[0].pageX; 
+                   endy = e.originalEvent.changedTouches[0].pageY;     
+                    var direction = GetSlideDirection(startx, starty, endx, endy);
+                    var dy = Math.abs(starty - endy);
+                    switch(direction){
+                        case 1:
+                        if(dy>50){pullup('page1','page2');
+                            setTimeout(function(){
+                                $('#page1').css('display','none'); 
+                            },800); 
                         }
-                    });
-                    $('#page2').on('touchstart', function (e) {
-                        startx = e.originalEvent.targetTouches[0].pageX;
-                        starty = e.originalEvent.targetTouches[0].pageY;
-                    });
-                    $('#page2').on('touchmove', function (e) {
-                        //e.preventDefault(); 
-                    });
-                    $('#page2').on('touchend', function (e) {
-                        endx = e.originalEvent.changedTouches[0].pageX;
-                        endy = e.originalEvent.changedTouches[0].pageY;
-                        var direction = GetSlideDirection(startx, starty, endx, endy);
-                        var dy = Math.abs(starty - endy);
-                        switch (direction) {
-                            case 1:
-                                if (dy > 90) {
-                                    pullup('page2', 'page3');
-                                }
-                                break;
-                            case 2:
-                                if (dy > 90) {
-                                    pulldown('page2', 'page1');
-                                }
-                                break;
-                        }
-                    });
-                    $('#page3').on('touchstart', function (e) {
-                        startx = e.originalEvent.targetTouches[0].pageX;
-                        starty = e.originalEvent.targetTouches[0].pageY;
-                    });
-                    $('#page3').on('touchmove', function (e) {
-                        //e.preventDefault(); 
-                    });
-                    $('#page3').on('touchend', function (e) {
-                        endx = e.originalEvent.changedTouches[0].pageX;
-                        endy = e.originalEvent.changedTouches[0].pageY;
-                        var direction = GetSlideDirection(startx, starty, endx, endy);
-                        var dy = Math.abs(starty - endy);
-                        switch (direction) {
-                            case 2:
-                                if (dy > 90 && listshow == 0) {
-                                    pulldown('page3', 'page2');
-                                }
-                                break;
-                        }
-                    });
-                    /*$('#page1').on('touchmove',function(e){
+                         break;
+                    }
+                });
+                $('#page2').on('touchstart',function(e){
+                    startx = e.originalEvent.targetTouches[0].pageX;
+                    starty = e.originalEvent.targetTouches[0].pageY;
+                });
+                $('#page2').on('touchmove',function(e){
+                    e.preventDefault(); 
+                });
+                $('#page2').on('touchend',function(e){
+                   endx = e.originalEvent.changedTouches[0].pageX; 
+                   endy = e.originalEvent.changedTouches[0].pageY;     
+                    var direction = GetSlideDirection(startx, starty, endx, endy);
+                    var dy = Math.abs(starty - endy);
+                    switch(direction){
+                        case 1:
+                        if(dy>90){
+                         pullup('page2','page3');
+                         
+                            }
+                         break;
+                        case 2:
+                        if(dy>90){
+                             pulldown('page2','page1');
+                            }
+                         break;
+                    }
+                });
+                $('#page3').on('touchstart',function(e){
+                    startx = e.originalEvent.targetTouches[0].pageX;
+                    starty = e.originalEvent.targetTouches[0].pageY;
+                });
+                $('#page3').on('touchmove',function(e){
+                    e.preventDefault(); 
+                });
+                $('#page3').on('touchend',function(e){
+                   endx = e.originalEvent.changedTouches[0].pageX; 
+                   endy = e.originalEvent.changedTouches[0].pageY;     
+                    var direction = GetSlideDirection(startx, starty, endx, endy);
+                    var dy = Math.abs(starty - endy);
+                    switch(direction){
+                        case 2:
+                            if(dy>90 && listshow == 0){
+                             pulldown('page3','page2');
+                            }
+                         break;
+                    }
+                });
+                /*$('#page1').on('touchmove',function(e){
                     endx = e.originalEvent.changedTouches[0].pageX;
                     endy = e.originalEvent.changedTouches[0].pageY; 
                     var direction = GetSlideDirection(startx, starty, endx, endy);
                     switch (direction) {
-                    case 0:
-                    alert("没滑动");
-                    break;
-                    case 1:
-                    $('#page1').css('opacity',0.8);
-                    $('#page1').css('position','fixed');
-                    $('#page2').css({
-                    'display':'block',
-                    'top': $(window).height()-$(window).scrollTop()
-                    });
-                    if($(window).scrollTop()>50){
-                    //  $('#page2').css('top','0px')     
-                    }else{
-                    }
-                    break;
-                    case 2:
-                    $('#page2').css({
-                    'top': $(window).height()-$(window).scrollTop()
-                    });
-                    break;
-                    case 3:
-                    break;
-                    case 4:
-                    break;
-                    default:            
+                        case 0:
+                        alert("没滑动");
+                        break;
+                        case 1:
+                            $('#page1').css('opacity',0.8);
+                            $('#page1').css('position','fixed');
+                            $('#page2').css({
+                                'display':'block',
+                                'top': $(window).height()-$(window).scrollTop()
+                            });
+                            if($(window).scrollTop()>50){
+                              //  $('#page2').css('top','0px')     
+                            }else{
+                            }
+                        break;
+                        case 2:
+                            $('#page2').css({
+                                'top': $(window).height()-$(window).scrollTop()
+                            });
+                        break;
+                        case 3:
+                        break;
+                        case 4:
+                        break;
+                        default:            
                     }   
-                    });*/
+                });*/
 
-                });
-            })($, document);
+            });
+            })($,document);
             
             </script>
      <body>
 </html>
+
 
