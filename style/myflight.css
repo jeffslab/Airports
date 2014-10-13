@@ -143,6 +143,7 @@ div.fr {
     color:#fff;
     text-align: center;
     margin: 0 auto;
+    margin-bottom: 3.5rem;
     font-size: 11rem;
     font-family: 'roboto';
 }
@@ -155,7 +156,6 @@ div.fr {
 
 .food li {
     height: 22rem;
-    background: #3264ba;
 }
 .fourInfos {
     color:#fff;
@@ -171,10 +171,11 @@ div.fr {
     width: 19.7rem;
     display: inline-block;
     vertical-align: middle;
-    margin-bottom: 1rem;
+    margin-bottom: 4%;
+    background: url('../res/libg.png') 0 0 repeat;
 }
 .fourInfos li:nth-of-type(odd) {
-    margin-right: 1rem;
+    margin-right: 4%;
 }
 .fourInfos li:first-child p:first-child {
     margin-top: 2rem;
@@ -209,7 +210,6 @@ div.fr {
 }
 .movie li {
     height: 24.5rem;
-    background: #3264ba;
 }
 
 
@@ -355,7 +355,7 @@ div.fr {
     line-height: 0;
     font-size: 0;
     width: 86%;
-    margin: 0 auto 3rem;
+    margin: 0 auto 4.5rem;
     clear: both;
     background: #fff;
     opacity: 0.5;
@@ -394,10 +394,4 @@ div.fr {
     0% { top: 9999px; }
     50% { top: 300px; }
     100% { top: 0; }
-}
-.topSlide {
-    -webkit-animation: topSlide .5s linear;
-}
-.topEnd {
-    top: 0;
 }
