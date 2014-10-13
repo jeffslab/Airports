@@ -77,8 +77,8 @@
 .in, .out {
         -webkit-animation-timing-function: ease-in-out;
 		-moz-animation-timing-function: ease-in-out;
-        -webkit-animation-duration: 400ms;
- 		  -moz-animation-duration: 400ms;
+        -webkit-animation-duration: 600ms;
+ 		  -moz-animation-duration: 600ms;
   }
 
   /* for Chrome and Safari*/

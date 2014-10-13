@@ -30,26 +30,28 @@
         .main section.hide{ display: none;}
         .main section.curr{ display: block;} 
         .clearfix:after {clear: both;content: "";display: block;visibility: hidden;}
-        .menu{ width: 100%; position: fixed; bottom:0;left:0;z-index:30;background:#fff }
+        .menu{ width: 100%; position: fixed; bottom:0;left:0;z-index:5;background:#fff }
         .menu.menucurr{ background: #fff;}
         .menu ul{width: 100%; height: 100%; }
-        .menu li{ width: 16.66%; float: left;text-align: center; background: #fff; font-size:8rem;color:#999;}
+        .menu li{ width: 16.66%; float: left;text-align: center; background: #fff;color:#999;}
         .menu li.curr{color:#000}   
-        .menu ul i{line-height:2rem;font-size:6rem;}
-        .menu li p{line-height:2rem;font-size:2rem;text-align:center;margin:0 0 2px 0}        
+        .menu ul i{line-height:5rem;font-size:4rem;}
+        .menu li p{line-height:2rem;font-size:2rem;text-align:center;margin:0 0 2px 0}  
+        .main_bottom{background-color:transparent;height:7rem}  
         
         .detail{width: 100%; height: 100%; position:relative;top:0;left:0;z-index:20;background-color:#fff}
         .detail div{background-color:#fff}
         .detail hr{width:100%;color:#ccc;size:1;}       
         .filter{filter:alpha(opacity=50);-moz-opacity:0.5;-khtml-opacity: 0.5;opacity: 0.5;}
         .bottom{width:100%;height: 5rem;}
-        .loading{color:#000;position:absolute;width:100%;top:0;bottom:0;text-align:center;background-image:url('../res/ajax-loader.gif');background-color:rgba(0,0,0,0.8);background-position:center;background-repeat:no-repeat}
+        .loading{color:#000;position:absolute;width:100%;top:0;bottom:0;text-align:center;background-image:url('../res/ajax-loader.gif');background-color:rgba(0,0,0,0.8);background-position:center;background-repeat:no-repeat;}
         .loading img{width:2.7rem;height:2.7rem;position:absolute;top:0;left:0;right:0;bottom:0}
         .main_mask{position:absolute;top:0;left:0; width:100%;height:100%;filter:alpha(opacity=30);-moz-opacity:0.3;-khtml-opacity: 0.3;opacity: 0.3;background-color:#000;z-index:10;}
-        .muti_img{position:relative;}       
+        .muti_img{position:relative;}
          
-        #position{text-align: center;font-size: 10rem;line-height: 2rem;color: #fff;display: block;position: absolute;bottom: 2rem;left: 50%;margin-left: -50%;width: 100%;}
-        #position em.on{color:#FBFA4F}   
+        #position{position: absolute;left:42%;bottom: 15px;height: 13px;text-align: center;border-radius: 10px;background-color:transparent;}
+        #position a{float: left;margin: 2px;padding-top: 9px;width: 9px;height: 0;border-radius: 50%;background: #b7b7b7;overflow: hidden;}
+        #position a.on{background-color:#FBFA4F}   
         
         .ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper
         {
@@ -108,7 +110,7 @@
             </section>
             <section class="hide" id="sec-menu-5">
             </section>
-            <div style="background-color:transparent;height:6rem"></div>
+            <div class="main_bottom"></div>
             <div class="main_mask"></div>            
         </div>
         <div class="menu">
@@ -150,12 +152,12 @@
                     <div><img src="../res/menu-1/shop-1/picture-3.jpg" alt=""/></div>
                     <div><img src="../res/menu-1/shop-1/picture-4.jpg" alt=""/></div>            
                 </div>
-                <span id="position">
-                <em class="on">•</em>
-                <em>•</em>
-                <em>•</em>
-                <em>•</em>
-                </span>
+                <div id="position">
+                    <a href="javascript:;" class="on"></a>
+                    <a href="javascript:;"></a>
+                    <a href="javascript:;"></a>
+                    <a href="javascript:;"></a>
+                </div>
             </div>        
             <div style="vertical-align:middle;line-height:7rem;">
                 <div style="margin: 2rem 0 0 4rem;">
@@ -190,7 +192,7 @@
         var imgMap = {};
         var menuIndex = 0;
         var menuLength = 5;
-        var bullets = document.getElementById('position').getElementsByTagName('em');
+        var bullets = document.getElementById('position').getElementsByTagName('a');
         var mainScrollTop = 0;
         var mainImgNum = 0;
         var imgData = [{
@@ -224,13 +226,6 @@
         }, {
             class: 'sec-menu-5',
             path: '../res/menu-5/',
-            sub: 'shop-',
-            pic_pre: 'picture-',
-            len: 12,
-            names: ['太平洋咖啡', 'KFC', '麦当劳', '千岛咖啡', '真功夫', '太平洋咖啡', 'KFC', '麦当劳', '千岛咖啡', '真功夫', '千岛咖啡', '真功夫']
-        }, {
-            class: 'sec-menu-6',
-            path: '../res/menu-6/',
             sub: 'shop-',
             pic_pre: 'picture-',
             len: 12,
@@ -279,7 +274,7 @@
             myTran.goTo('myslide', '', '#page1', '#page2');
             setTimeout(function () {
                 showMain();
-            }, 400)
+            }, 600)
         }
 
         function showMain() {
@@ -316,6 +311,9 @@
 
         function loadDetail(id) {
             var args = id.split('_');
+            if (args.length == 4) {
+                args.shift();
+            }
             var cls = args[1];
             var index = parseInt(args[2]);
             var imgObj = imgMap[cls];
@@ -342,8 +340,9 @@
                         var imgPath = item.path + item.sub + (i + 1) + '/' + item.pic_pre + '0.jpg';
                         var imgId = 'img_' + item.class + '_' + i;
                         var img = '<div class="muti_img"><img src="' + imgPath + '" alt="" id="' + imgId + '"></div>';
-                        if (sectionAll.children().length < 12) {
-                            sectionAll.append(img);
+                        if (sectionAll.children().length < 12 && i < 3) {
+                            var all_img = '<div class="muti_img"><img src="' + imgPath + '" alt="" id="all_' + imgId + '"></div>';
+                            sectionAll.append(all_img);
                         }
                         par.append(img);
                     }
@@ -464,6 +463,7 @@
                     $(this).addClass("curr").siblings().removeClass("curr");
                     $(".main section").eq(index).show().siblings('section').hide();
                     window.scrollTo(0, 0);
+                    e.stopPropagation();
                 })
             })
         }
