@@ -408,14 +408,14 @@
                 //});
                 $('#page3').find('#lostlistshow').on('click',function(){
                     $('#page3 .wrapper').fadeOut(function(){
-                        $('#page3').css('-webkit-animation','blurChange .5s linear');
+                        $('#page3').css('-webkit-fliter','blur(5px)');
                         $('.lost-list').fadeIn(); 
                         listshow = 1;
                     });
                 });
                 $('.close-list').on('click',function(){
                     $('.lost-list').fadeOut(function(){
-                        $('#page3').css('-webkit-animation',''); 
+                        $('#page3').css('-webkit-filter',''); 
                         $('#page3 .wrapper').fadeIn();
                         listshow = 0;
                     }); 
