@@ -29,6 +29,7 @@
         <style>
             body{
             -webkit-text-size-adjust:none; 
+            background-color:#000!important;
             }
             .bg-2{
                 width:100%;
@@ -71,9 +72,9 @@
                 font-size:10rem; 
             }
              .wrapper h2{
-                font-size:1.6rem;
+                font-size:2rem;
                 font-weight:bold;
-                margin-top:4rem;
+                margin-top:2rem;
             }
             .wrapper .detail{
                 margin:0 auto; 
@@ -102,12 +103,16 @@
                 margin:0 auto;
                 text-shadow:none;
             }
+            .wrapper .detail .positionMess{margin-top:0.5rem;}
             .wrapper .detail .positionMess p{
                 font-weight:bold; 
             }
+            .wrapper .detail .positionMess .posDetail{
+                margin-top:1rem; 
+            }
             .wrapper .detail .positionMess .posDetail p{
                 font-size:1.4rem; 
-                line-height:1.5rem;
+                line-height:1.5;
                 font-weight:normal;
             }
             .wrapper .btn-down{
@@ -149,7 +154,8 @@
             }
             .wrapper .detail .mess .place{
                 font-size:1.3rem; 
-                line-height:1.5rem;
+                line-height:1.6;
+                padding-top:1.5rem;
             }  
             .lost-list{
                 width:28rem;
@@ -191,6 +197,7 @@
                 table-layout:fixed; 
                 width:100%;
                 color:#fff;
+                line-height:2;
             }
             .lost-list thead{
                 font-size:1.6rem; 
@@ -207,8 +214,8 @@
                 -webkit-transform:translate3d(0,0,0); 
             }
             .scale{
-                transform:scale(1.2);
-                -webkit-transform:scale(1.2);
+                transform:scale(.95);
+                -webkit-transform:scale(.95);
             }
 
             @-webkit-keyframes blurChange {
@@ -250,7 +257,7 @@
         </div>
         <div id="page2" data-role="page" class="bg-2">
             <div class="wrapper"> 
-                 <div class="topicon">
+                 <div class="topicon" style="margin-bottom:2rem;padding-top:2rem;">
                      <i class="icon icon_emergency myfonts"></i> 
                      <h2>医疗急救</h2>
                  </div>
@@ -263,7 +270,7 @@
                              <p>服务时间：06:30-22:00</p>
                          </div>
                      </div>
-                     <a class="call" href="tel:010-8819999">
+                     <a class="call" href="tel:010-8819999" style="margin-top:2rem;">
                          <i class="icon icon_call"></i>呼叫电瓶车 
                      </a>
                  </div>
@@ -277,14 +284,14 @@
                      <h2>失物招领</h2>
                  </div>
                  <div class="detail">
-                     <div style="margin-bottom:1.7rem;overflow:hidden;">   
+                     <div style="margin-bottom:1rem;overflow:hidden;">   
                          <a id="lostlistshow"class="list" href="javascript:;">近期失物清单</a>
                          <a class="notice" href="javascript:;">认领须知</a>
                       </div> 
-                     <a class="call" href="tel:010-8819999">
+                     <a class="call" href="tel:010-8819999" style="margin-top:0;">
                          <i class="icon icon_call"></i>电话咨询 
                      </a>
-                      <div class="mess">
+                      <div class="mess" style="margin-top:1rem;">
                           <p style="font-weight:bold;font-size:1.5rem;">服务位置</p>
                           <ul class="place">
                               <li>T3-C二层到港大厅A出口东侧</li>
@@ -295,6 +302,7 @@
                       </div>
                  </div>
              </div>
+        </div>
         </div>
         <div class="lost-list">
                  <div class="title">
@@ -316,7 +324,7 @@
                              <td style="text-align:right;">飞机上</td>    
                          </tr>
                          <tr>
-                             <td>xx身份证</td>             
+                             <td>xx水杯</td>             
                              <td style="text-align:center;">2014-4-17</td>
                              <td style="text-align:right;">飞机上</td>    
                          </tr>
@@ -330,6 +338,31 @@
                              <td style="text-align:center;">2014-4-17</td>
                              <td style="text-align:right;">飞机上</td>    
                          </tr>
+                         <tr>
+                             <td>xx水杯</td>             
+                             <td style="text-align:center;">2014-4-17</td>
+                             <td style="text-align:right;">飞机上</td>    
+                         </tr>
+                         <tr>
+                             <td>xx水杯</td>             
+                             <td style="text-align:center;">2014-4-17</td>
+                             <td style="text-align:right;">飞机上</td>    
+                         </tr><tr>
+                             <td>xx水杯</td>             
+                             <td style="text-align:center;">2014-4-17</td>
+                             <td style="text-align:right;">飞机上</td>    
+                         </tr>
+                          <tr>
+                             <td>xx水杯</td>             
+                             <td style="text-align:center;">2014-4-17</td>
+                             <td style="text-align:right;">飞机上</td>    
+                         </tr>
+                         <tr>
+                             <td>xx水杯</td>             
+                             <td style="text-align:center;">2014-4-17</td>
+                             <td style="text-align:right;">飞机上</td>    
+                         </tr>
+
                      </tbody>
                  </table>
              </div>
