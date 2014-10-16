@@ -12,17 +12,16 @@
 .posBgFirstPage, .posBgSecondPage {
     position: fixed;
     height: 100rem;
-    background: #fff;
     width: 100%;
     left: 0;
 }
 @-webkit-keyframes blurChange {
-    0% { -webkit-filter: blur(1px); }
-    50% { -webkit-filter: blur(3px); }
-    100% { -webkit-filter: blur(5px); }
+    0% { -webkit-filter: blur(0); }
+    50% { -webkit-filter: blur(1px); }
+    100% { -webkit-filter: blur(2px); }
 }
 .posBgFirstAnimateEnd {
-    -webkit-filter: blur(5px);
+    -webkit-filter: blur(2px);
 }
 .posBgFirstAnimate {
 	-webkit-animation: blurChange .5s linear;
