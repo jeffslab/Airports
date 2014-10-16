@@ -296,6 +296,7 @@ div.fr {
 
 .flightsList {
     margin: 0 auto;
+    margin-bottom: 5rem;
     text-align: center;
 }
 .flightsList li a {
