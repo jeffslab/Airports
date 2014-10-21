@@ -111,7 +111,7 @@
             <section class="hide" id="sec-menu-5">
             </section>
             <div class="main_bottom"></div>
-            <div class="main_mask"></div>            
+            <div class="main_mask hide"></div>            
         </div>
         <div class="menu">
             <ul class="clearfix">
@@ -356,12 +356,12 @@
                 }
             })
             var imgCount = 0;
-            $('#main img').load(function (e) {
-                imgCount++;
-                if (imgCount == mainImgNum) {
-                    $('.main_mask').addClass('hide');
-                }
-            })
+//            $('#main img').load(function (e) {
+//                imgCount++;
+//                if (imgCount == mainImgNum) {
+//                    $('.main_mask').addClass('hide');
+//                }
+//            })
             $('#main').on('touchstart', function (e) {
                 mStartx = e.originalEvent.targetTouches[0].pageX;
                 mStarty = e.originalEvent.targetTouches[0].pageY;
