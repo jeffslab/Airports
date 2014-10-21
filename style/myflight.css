@@ -1,30 +1,36 @@
 .secondPageWrap {
     position: relative;
     width: 100%;
+    height: auto;
     overflow: hidden;
-    z-index: 3;
+    z-index: 2;
 }
 .wrap {
     position: relative;
     width: 100%;
     overflow: hidden;
 }
-.posBgFirstPage, .posBgSecondPage {
+.posBgFirstPage, .posBgSecondPage, .posBgFirstPageEnd {
     position: fixed;
-    height: 100rem;
+    height: auto;
     width: 100%;
     left: 0;
 }
 @-webkit-keyframes blurChange {
     0% { -webkit-filter: blur(0); }
-    50% { -webkit-filter: blur(1px); }
-    100% { -webkit-filter: blur(2px); }
+    50% { -webkit-filter: blur(3px); }
+    100% { -webkit-filter: blur(5px); }
 }
 .posBgFirstAnimateEnd {
-    -webkit-filter: blur(2px);
+    -webkit-filter: blur(5px);
 }
 .posBgFirstAnimate {
 	-webkit-animation: blurChange .5s linear;
+}
+.posBgFirstPageEnd {
+    background: #1b52b2 url('../res/bg-flight.jpg') no-repeat 0 0;
+    background-size: 100% 100%;
+    z-index: 1;
 }
 .posBgFirstPage {
     background: #1b52b2 url('../res/bg-flight.jpg') no-repeat 0 0;
@@ -48,6 +54,7 @@
     background: url('../res/bg-flight.jpg') no-repeat 0 0 fixed;
     background-size: 100% 100%;
     */
+    padding-top: 2rem;
     z-index: 4;
 }
 .posAbsSmsPage {
